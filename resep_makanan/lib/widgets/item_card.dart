@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resep_makanan/models/makanan.dart';
+import 'package:resep_makanan/screens/detail_screen.dart';
 
 class ItemCard extends StatelessWidget {
   final Makanan makanan;
@@ -8,23 +9,32 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      margin: EdgeInsets.all(4),
-      elevation: 1,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                makanan.imageAsset,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+    return InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailScreen(makanan: makanan),
+            ),
+          );
+        },
+        child: Card(
+          shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+          ),
+          margin: EdgeInsets.all(4),
+          elevation: 1,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset(
+                    makanan.imageAsset,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
             ),
           ),
           Padding(
@@ -42,9 +52,10 @@ class ItemCard extends StatelessWidget {
             child: Text(
               makanan.asal,
               style: const TextStyle(fontSize: 12),
-            ),
-          )
-        ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
