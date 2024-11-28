@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:resep_makanan/models/makanan.dart';
+import 'package:resep_makanan/data/makanan_data.dart';
+
 
 
 class DetailScreen extends StatelessWidget {
@@ -84,31 +86,25 @@ class DetailScreen extends StatelessWidget {
                     Icon(Icons.place,color: Colors.red,),
                     SizedBox(width: 8,),
                     SizedBox(width: 70,
-                      child: Text('Asal Makanan', style: TextStyle(
+                      child: Text('Asal', style: TextStyle(
                           fontWeight: FontWeight.bold),),),
                     Text(': ${makanan.asal}',),
-                  ],),
-                  Row(children: [
-                    Icon(Icons.kitchen,color: Colors.blue,),
+                  ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    Icon(Icons.note_alt,color: Colors.blue,),
                     SizedBox(width: 8,),
                     SizedBox(width: 70,
-                      child: Text('Dibangun', style: TextStyle(
+                      child: Text('Bahan', style: TextStyle(
                           fontWeight: FontWeight.bold),),),
-                    Text(': ${makanan.deskripsi}',),
-                  ],),
-                  Row(children: [
-                    Icon(Icons.house,color: Colors.green,),
-                    SizedBox(width: 8,),
-                    SizedBox(width: 70,
-                      child: Text('Tipe', style: TextStyle(
-                          fontWeight: FontWeight.bold),),),
-                    Text(': ${makanan.built}',),
+                    Expanded(child: Text(': ${makanan.deskripsi}',
+                      softWrap: true,  // Membungkus teks ke baris berikutnya
+                    ),),
+                  ],
+                  ),
 
-                  ],),
-                  SizedBox(height: 16,),
-                  Divider(color: Colors.deepPurple.shade100,),
-                  SizedBox(height: 16,),
-                  // info bawah (deskripsi)
                 ],
               ),
             ),
