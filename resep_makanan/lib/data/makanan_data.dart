@@ -4,7 +4,9 @@ var makananList = [
   Makanan(
       nama: 'Nasi Goreng',
       asal: 'Indonesia',
-      deskripsi:
+      kategori: 'Makanan Utama',
+      deskripsi: 'Nasi goreng merupakan sajian nasi yang digoreng dalam sebuah wajan atau penggorengan yang menghasilkan cita rasa berbeda karena dicampur dengan bumbu-bumbu seperti garam, bawang putih, bawang merah, merica, rempah-rempah tertentu dan kecap manis',
+      bahan:
       'Bahan-bahan: '
           '1. 100 gr daging ayam, dipotong dadu '
           '2. 100 gr udang, dikupas dari kulitnya '
@@ -23,7 +25,18 @@ var makananList = [
           '14. 1 buah wortel ukuran sedang, dipotong dadu '
           '15. garam secukupnya '
           '16. minyak goreng secukupnya',
-      built: 'Abad ke-10',
+      cara:
+      'Cara Membuat :'
+          '1. Potong-potong daging ayam berbentuk dadu'
+          '2. Cuci udang lalu potong-potong'
+          '3. Panaskan minyak dalam wajan, masukkan udang dan ayam'
+          '4. Masak sebentar hingga matang. Tiriskan'
+          '5. Panaskan sedikit minyak dalam wajan'
+          '6. Masukkan telur, aduk hingga bergumpal dan matang'
+          '7. Masukkan nasi, aduk-aduk hingga terurai'
+          '8. Tambahkan udang, mie kuning dan daging ayam . Aduk rata'
+          '9. Bumbu dengan bawang merah, putih, saus tiram, saus cabai, merica dan kecap'
+          '10. Aduk-aduk hingga rata lalu angkat',
       imageAsset: 'images/nasigoreng.jpg',
       imageUrls: [
         'https://cdn.rri.co.id/berita/Cirebon/o/1719201132146-ILUSTRASI_NASGOR/8w83zosucbx67ts.jpeg',
@@ -35,8 +48,11 @@ var makananList = [
   ),
   Makanan(
       nama: 'Rawon',
-      asal: 'Surabaya, Jawa Timur',
-      deskripsi: 'Bahan-bahan :'
+      asal: 'Ponorogo, Jawa Timur',
+      kategori: 'Makanan Tradisional',
+      deskripsi: 'Rawon adalah masakan khas Indonesia yang berasal dari Ponorogo, Jawa Timur, yang berupa sup daging berkuah hitam dengan campuran bumbu khas yang menggunakan kluwek. Makanan ini telah berusia lebih dari 1.000 tahun.Rawon dari Ponorogo menyebar ke penjuru Jawa Timur dan dikenal sebagai masakan khas Jawa Timur.',
+      bahan:
+      'Bahan-bahan :'
           '1. 500 gram daging sandung lamur (brisket)'
           '2. 6 lembar daun jeruk'
           '3. 3 batang serai, geprek'
@@ -53,8 +69,15 @@ var makananList = [
           '8. 1 cm jahe'
           '9. 1 batang bawang perai dipotong-potong'
           '10. Garam secukupnya'
-          '11. Gula secukupnya',
-      built: '901 M',
+          '11. Gula secukupnya'
+          '12. Daun jeruk'
+          '13. Serai',
+      cara:
+      'Cara Membuat :'
+          '1. Rebus air sampai mendidih. Masukkan daging sapi, rebus sampai empuk'
+          '2. Masukkan bahan bumbu halus dan sedikit minyak goreng, haluskan pakai blender'
+          '3. Tumis sampai matang bumbu halus, serai, dan daun jeruk. Masukkan bumbu ke dalam air rebusan daging'
+          '4. Tambahkan air asam jawa, garam, gula, dan kaldu sapi. Koreksi rasa. Masak sampai daging empuk dan rasa sudah pas. Angkat dan sajikan bersama bahan pelengkap',
       imageAsset: 'images/rawon.jpg',
       imageUrls: [
         'https://cdn.idntimes.com/content-images/community/2022/05/fromandroid-9e9e92b57ee8fce6444c5c6e0af25e19.jpg',
@@ -65,9 +88,11 @@ var makananList = [
     isFavorite: false,
   ),
   Makanan(
-      nama: 'Gado-Gado',
+      nama: 'Gado - Gado',
       asal: 'Surabaya, Jawa Timur',
-      deskripsi: 'Bahan-Bahan :'
+      kategori: 'Makanan Tradisional',
+      deskripsi: 'GADO-GADO adalah makanan tradisional asli Indonesia, dalam bahasa sunda disebut lotek. Makanan ini sendiri mirip seperti salad karena berisi beraneka sayur-sayuran rebus. Perbedaannya dengan salad adalah pada makanan ini kombinasi sayuran dan bahan-bahan rebusan lainnya disajikan dengan disiram saus kacang.',
+      bahan: 'Bahan-Bahan :'
           '1. 1 siung bawang putih'
           '2. 3 siung bawang merah'
           '3. 125 gr kacang tanah'
@@ -78,7 +103,13 @@ var makananList = [
           '8. 1 sdm Tepung Tapioka'
           '9. Air Secukupnya'
           '10. Minyak Secukupnya',
-      built: 'abad ke-17',
+      cara:
+      'Cara Membuat :'
+          '1. Blender semua bahan bumbu kacang sampai halus'
+          '2. Rebus dengan api kecil hingga mendidih'
+          '3. Terus masak bumbu kacang hingga matang sampai meletup-letup dan kental'
+          '4. Angkat dan sisihkan'
+          '5. Penyajian: Ambil piring, tata rapi semua bahan gado-gado. Siram dengan saus kacang dan taburi dengan bawang goreng dan beri kerupuk secukupnya.',
       imageAsset: 'images/gadogado.jpg',
       imageUrls: [
         'https://www.masakapahariini.com/wp-content/uploads/2019/01/gado-gado-MAHI.jpg',
@@ -91,8 +122,10 @@ var makananList = [
   Makanan(
       nama: 'Soto Ayam',
       asal: 'Pekalongan ,Jawa Tengah',
-      deskripsi: '',
-      built: 'abad ke-19',
+      kategori: 'Makanan Tradisional',
+      deskripsi: 'Soto merupakan salah satu jenis makanan khas Indonesia yang sangat populer di kalangan masyarakat. Makanan ini terkenal dengan kuahnya yang kaya rempah dan bumbu, serta daging yang lembut dan gurih.',
+      bahan: '',
+      cara: 'abad ke-19',
       imageAsset: 'images/soto.jpg',
       imageUrls: [
         'https://asset.kompas.com/crops/aejVVPsdwoduxukD323R3zPqeQQ=/85x119:884x652/1200x800/data/photo/2023/09/01/64f19940639d3.jpg',

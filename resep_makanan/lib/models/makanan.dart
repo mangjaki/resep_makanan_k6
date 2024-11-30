@@ -1,8 +1,10 @@
 class Makanan {
   final String nama;
   final String asal;
+  final String kategori;
   final String deskripsi;
-  final String built;
+  final String bahan;
+  final String cara;
   final String imageAsset;
   final List<String> imageUrls;
   bool isFavorite;
@@ -10,8 +12,10 @@ class Makanan {
   Makanan({
     required this.nama,
     required this.asal,
+    required this.kategori,
     required this.deskripsi,
-    required this.built,
+    required this.bahan,
+    required this.cara,
     required this.imageAsset,
     required this.imageUrls,
     this.isFavorite = false,

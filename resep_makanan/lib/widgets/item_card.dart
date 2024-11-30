@@ -37,6 +37,14 @@ class ItemCard extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 5),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, bottom: 8),
+            child: Text(
+              makanan.kategori,
+              style: const TextStyle(fontSize: 12),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 16,bottom: 8),
             child: Text(
