@@ -4,8 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:resep_makanan/models/makanan.dart';
 import 'package:resep_makanan/data/makanan_data.dart';
 
-
-
 class DetailScreen extends StatelessWidget {
   final Makanan makanan;
 
@@ -61,25 +59,35 @@ class DetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 16,),
+                  SizedBox(height: 8,),
                   // info atas (nama candi dan tombol favorite
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        makanan.nama,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), // Menambahkan padding
+                        decoration: BoxDecoration(
+                          color: Colors.yellowAccent,
+                          borderRadius: BorderRadius.circular(8), // Opsional: Membuat sudut membulat
+                          border: Border.all(
+                            color: Colors.deepOrangeAccent.withOpacity(0.3), // Garis border dengan transparansi (samar)
+                            width: 2, // Ketebalan garis border
+                          ),
+                          ),
+                        child : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Memastikan elemen tersebar antara kiri dan kanan
+                          children: [
+                            Icon(Icons.restaurant_menu, size: 24),
+                            Text(makanan.nama,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: (){}, icon:
+                              Icon(Icons.favorite_border),
+                            ),
+                          ],
                         ),
                       ),
-                      IconButton(
-                        onPressed: (){}, icon:
-                      Icon(Icons.favorite_border),
-                      )
-                    ],
-                  ),
-
                   // info tengah (lokasi, dibangun, tipe)
                   SizedBox(height: 16,),
                   Row(children: [
@@ -99,7 +107,7 @@ class DetailScreen extends StatelessWidget {
                       SizedBox(width: 70,
                         child: Text('Kategori', style: TextStyle(
                             fontWeight: FontWeight.bold),),),
-                      Expanded(child: Text(': ${makanan.deskripsi}'),),
+                      Expanded(child: Text(': ${makanan.kategori}'),),
                     ],
                   ),
                   Row(

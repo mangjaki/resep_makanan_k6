@@ -83,15 +83,16 @@ class _MainScreenState extends State<MainScreen> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_outline, color: Colors.deepOrange),
-              activeIcon: Icon(Icons.favorite),
-              label: 'Favorite',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.search_outlined, color: Colors.deepOrange),
               activeIcon: Icon(Icons.search),
               label: 'Search',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_outline, color: Colors.deepOrange),
+              activeIcon: Icon(Icons.favorite),
+              label: 'Favorite',
+            ),
+
             BottomNavigationBarItem(
               icon: Icon(Icons.person_outline, color: Colors.deepOrange),
               activeIcon: Icon(Icons.person),
