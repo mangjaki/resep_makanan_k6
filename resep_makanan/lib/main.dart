@@ -70,27 +70,34 @@ class _MainScreenState extends State<MainScreen> {
               _currentIndex = index;
             });
           },
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          selectedItemColor: Colors.blueAccent,
+          unselectedItemColor: Colors.grey,
+          showSelectedLabels: true,
+          showUnselectedLabels: false,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Colors.deepPurple,),
+              icon: Icon(Icons.home_outlined, color: Colors.deepOrange),
+              activeIcon: Icon(Icons.home),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search, color: Colors.deepPurple,),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite, color: Colors.deepPurple,),
+              icon: Icon(Icons.favorite_outline, color: Colors.deepOrange),
+              activeIcon: Icon(Icons.favorite),
               label: 'Favorite',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.face, color: Colors.deepPurple,),
+              icon: Icon(Icons.search_outlined, color: Colors.deepOrange),
+              activeIcon: Icon(Icons.search),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline, color: Colors.deepOrange),
+              activeIcon: Icon(Icons.person),
               label: 'Profile',
-            )
+            ),
           ],
-          selectedItemColor: Colors.deepPurple,
-          unselectedItemColor: Colors.deepPurple[100],
-          showUnselectedLabels: true,
         ),
       ),
     );
