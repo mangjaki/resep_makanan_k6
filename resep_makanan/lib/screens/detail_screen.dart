@@ -83,7 +83,7 @@ class DetailScreen extends StatelessWidget {
                   // info tengah (lokasi, dibangun, tipe)
                   SizedBox(height: 16,),
                   Row(children: [
-                    Icon(Icons.place,color: Colors.red,),
+                    Icon(Icons.location_on,color: Colors.red,),
                     SizedBox(width: 8,),
                     SizedBox(width: 70,
                       child: Text('Asal', style: TextStyle(
@@ -94,26 +94,60 @@ class DetailScreen extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Icon(Icons.note_alt,color: Colors.blue,),
+                      Icon(Icons.kitchen,color: Colors.blue,),
+                      SizedBox(width: 8,),
+                      SizedBox(width: 70,
+                        child: Text('Kategori', style: TextStyle(
+                            fontWeight: FontWeight.bold),),),
+                      Expanded(child: Text(': ${makanan.deskripsi}'),),
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    Icon(Icons.description,color: Colors.blue,),
                     SizedBox(width: 8,),
                     SizedBox(width: 70,
-                      child: Text('Bahan', style: TextStyle(
+                      child: Text('Deskripsi', style: TextStyle(
                           fontWeight: FontWeight.bold),),),
-                    Expanded(child: Text(': ${makanan.deskripsi}',
-                      softWrap: true,  // Membungkus teks ke baris berikutnya
-                    ),),
+                    Expanded(child: Text(': ${makanan.deskripsi}'),),
                   ],
                   ),
-
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.shopping_basket,color: Colors.blue,),
+                      SizedBox(width: 8,),
+                      SizedBox(width: 70,
+                        child: Text('Bahan', style: TextStyle(
+                            fontWeight: FontWeight.bold),),),
+                      Expanded(child: Text(': ${makanan.bahan}'
+                        // Membungkus teks ke baris berikutnya
+                      ),),
+                    ],
+                  ),
                 ],
               ),
             ),
-            //detail galerry
             Padding(
               padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Divider(color: Colors.deepPurple.shade100),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.restaurant_menu,color: Colors.blue,),
+                      SizedBox(width: 8,),
+                      SizedBox(width: 70,
+                        child: Text('Cara Masak', style: TextStyle(
+                            fontWeight: FontWeight.bold),),),
+                      Expanded(child: Text(': ${makanan.cara}'
+                        // Membungkus teks ke baris berikutnya
+                      ),),
+                    ],
+                  ),
                   Divider(color: Colors.deepPurple.shade100),
                   Text('Galeri', style: TextStyle(
                     fontSize: 16, fontWeight: FontWeight.bold,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resep_makanan/screens/home_screen.dart';
+import 'package:resep_makanan/screens/search_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _children = [
     const HomeScreen(),
-    //const SearchScreen(),
+    const SearchScreen(),
     //const FavoriteScreen(),
     //const ProfileScreen(),
   ];

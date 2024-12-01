@@ -7,7 +7,6 @@ var makananList = [
       kategori: 'Makanan Utama',
       deskripsi: 'Nasi goreng merupakan sajian nasi yang digoreng dalam sebuah wajan atau penggorengan yang menghasilkan cita rasa berbeda karena dicampur dengan bumbu-bumbu seperti garam, bawang putih, bawang merah, merica, rempah-rempah tertentu dan kecap manis',
       bahan:
-      'Bahan-bahan: '
           '1. 100 gr daging ayam, dipotong dadu '
           '2. 100 gr udang, dikupas dari kulitnya '
           '3. 100 gr mie kuning '
@@ -26,7 +25,6 @@ var makananList = [
           '15. garam secukupnya '
           '16. minyak goreng secukupnya',
       cara:
-      'Cara Membuat :'
           '1. Potong-potong daging ayam berbentuk dadu'
           '2. Cuci udang lalu potong-potong'
           '3. Panaskan minyak dalam wajan, masukkan udang dan ayam'
@@ -52,7 +50,6 @@ var makananList = [
       kategori: 'Makanan Tradisional',
       deskripsi: 'Rawon adalah masakan khas Indonesia yang berasal dari Ponorogo, Jawa Timur, yang berupa sup daging berkuah hitam dengan campuran bumbu khas yang menggunakan kluwek. Makanan ini telah berusia lebih dari 1.000 tahun.Rawon dari Ponorogo menyebar ke penjuru Jawa Timur dan dikenal sebagai masakan khas Jawa Timur.',
       bahan:
-      'Bahan-bahan :'
           '1. 500 gram daging sandung lamur (brisket)'
           '2. 6 lembar daun jeruk'
           '3. 3 batang serai, geprek'
@@ -73,7 +70,6 @@ var makananList = [
           '12. Daun jeruk'
           '13. Serai',
       cara:
-      'Cara Membuat :'
           '1. Rebus air sampai mendidih. Masukkan daging sapi, rebus sampai empuk'
           '2. Masukkan bahan bumbu halus dan sedikit minyak goreng, haluskan pakai blender'
           '3. Tumis sampai matang bumbu halus, serai, dan daun jeruk. Masukkan bumbu ke dalam air rebusan daging'
@@ -92,7 +88,7 @@ var makananList = [
       asal: 'Surabaya, Jawa Timur',
       kategori: 'Makanan Tradisional',
       deskripsi: 'GADO-GADO adalah makanan tradisional asli Indonesia, dalam bahasa sunda disebut lotek. Makanan ini sendiri mirip seperti salad karena berisi beraneka sayur-sayuran rebus. Perbedaannya dengan salad adalah pada makanan ini kombinasi sayuran dan bahan-bahan rebusan lainnya disajikan dengan disiram saus kacang.',
-      bahan: 'Bahan-Bahan :'
+      bahan:
           '1. 1 siung bawang putih'
           '2. 3 siung bawang merah'
           '3. 125 gr kacang tanah'
@@ -104,7 +100,6 @@ var makananList = [
           '9. Air Secukupnya'
           '10. Minyak Secukupnya',
       cara:
-      'Cara Membuat :'
           '1. Blender semua bahan bumbu kacang sampai halus'
           '2. Rebus dengan api kecil hingga mendidih'
           '3. Terus masak bumbu kacang hingga matang sampai meletup-letup dan kental'
@@ -124,10 +119,8 @@ var makananList = [
       asal: 'Pekalongan ,Jawa Tengah',
       kategori: 'Makanan Tradisional',
       deskripsi: 'Soto merupakan salah satu jenis makanan khas Indonesia yang sangat populer di kalangan masyarakat. Makanan ini terkenal dengan kuahnya yang kaya rempah dan bumbu, serta daging yang lembut dan gurih.',
-      bahan:
-      'Bahan-Bahan :',
-      cara:
-      'Cara Membuat :',
+      bahan: '',
+      cara: '',
       imageAsset: 'images/soto.jpg',
       imageUrls: [
         'https://asset.kompas.com/crops/aejVVPsdwoduxukD323R3zPqeQQ=/85x119:884x652/1200x800/data/photo/2023/09/01/64f19940639d3.jpg',
