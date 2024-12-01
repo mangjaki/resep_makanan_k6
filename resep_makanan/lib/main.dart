@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: HomeScreen(),
-      home: MainScreen(),
+      home: const MainScreen(),
     );
   }
 }

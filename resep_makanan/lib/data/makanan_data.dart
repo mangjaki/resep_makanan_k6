@@ -124,8 +124,10 @@ var makananList = [
       asal: 'Pekalongan ,Jawa Tengah',
       kategori: 'Makanan Tradisional',
       deskripsi: 'Soto merupakan salah satu jenis makanan khas Indonesia yang sangat populer di kalangan masyarakat. Makanan ini terkenal dengan kuahnya yang kaya rempah dan bumbu, serta daging yang lembut dan gurih.',
-      bahan: '',
-      cara: 'abad ke-19',
+      bahan:
+      'Bahan-Bahan :',
+      cara:
+      'Cara Membuat :',
       imageAsset: 'images/soto.jpg',
       imageUrls: [
         'https://asset.kompas.com/crops/aejVVPsdwoduxukD323R3zPqeQQ=/85x119:884x652/1200x800/data/photo/2023/09/01/64f19940639d3.jpg',
