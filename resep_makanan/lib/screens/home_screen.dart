@@ -15,14 +15,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Resep Makanan'),
+        title: const Row(
+          mainAxisSize: MainAxisSize.min, // Menghindari mengambil ruang penuh
+          children: [
+            Icon(Icons.restaurant_menu, size: 24), // Ikon makanan
+            SizedBox(width: 8), // Jarak antara ikon dan teks
+            Text('Resep Makanan'),
+            SizedBox(width: 8),
+            Icon(Icons.restaurant_menu, size: 24),
+          ],
+        ),
         backgroundColor: Colors.deepOrange,
+        centerTitle: true, // Judul di tengah
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2
         ),
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         itemCount: makananList.length,
         itemBuilder: (_,index){
           Makanan makanan = makananList[index];
