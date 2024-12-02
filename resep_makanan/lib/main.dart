@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resep_makanan/screens/home_screen.dart';
 import 'package:resep_makanan/screens/search_screen.dart';
+import 'package:resep_makanan/screens/sign_up_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: HomeScreen(),
-      home: const MainScreen(),
+      home: SignUpScreen(),
     );
   }
 }
