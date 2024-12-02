@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resep_makanan/screens/home_screen.dart';
+import 'package:resep_makanan/screens/search_screen.dart';
+import 'package:resep_makanan/screens/sign_up_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: HomeScreen(),
-      home: const MainScreen(),
+      home: SignUpScreen(),
     );
   }
 }
@@ -46,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _children = [
     const HomeScreen(),
-    //const SearchScreen(),
+    const SearchScreen(),
     //const FavoriteScreen(),
     //const ProfileScreen(),
   ];
@@ -82,15 +84,16 @@ class _MainScreenState extends State<MainScreen> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_outline, color: Colors.deepOrange),
-              activeIcon: Icon(Icons.favorite),
-              label: 'Favorite',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.search_outlined, color: Colors.deepOrange),
               activeIcon: Icon(Icons.search),
               label: 'Search',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_outline, color: Colors.deepOrange),
+              activeIcon: Icon(Icons.favorite),
+              label: 'Favorite',
+            ),
+
             BottomNavigationBarItem(
               icon: Icon(Icons.person_outline, color: Colors.deepOrange),
               activeIcon: Icon(Icons.person),
