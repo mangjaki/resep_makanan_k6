@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resep_makanan/data/makanan_data.dart';
 import 'package:resep_makanan/models/makanan.dart';
+import 'package:resep_makanan/screens/detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -32,6 +33,15 @@ class _SearchScreenState extends State<SearchScreen> {
                   color: Colors.deepPurple[50]),
               child: TextField(
                 autofocus: false,
+                onChanged: (query) {
+                  setState(() {
+                    _searchQuery = query.toLowerCase();
+                    _filteredMakanans = makananList.where((makanan) {
+                      return makanan.nama.toLowerCase().contains(_searchQuery);
+                    }).toList();
+                  });
+                },
+
                 // TODO: 6. Implementasi fitur pencarian
                 decoration: InputDecoration(
                   hintText: 'Cari Makanan...',
@@ -52,8 +62,18 @@ class _SearchScreenState extends State<SearchScreen> {
               itemCount: _filteredMakanans.length,
               itemBuilder: (context, index) {
                 final makanan = _filteredMakanans[index];
+                return GestureDetector(
+                    onTap: () {
+                  // Navigasi ke layar detail saat item diklik
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailScreen(makanan: makanan),
+                    ),
+                  );
+                },
                 // TODO: 8. Implementasi GestureDetector dan Hero animation
-                return Card(
+                child : Card(
                   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,12 +100,14 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ],
                   ),
+                ),
                 );
               },
             ),
           ),
         ],
       ),
+
     );
   }
 }

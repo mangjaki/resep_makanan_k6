@@ -4,13 +4,32 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:resep_makanan/models/makanan.dart';
 import 'package:resep_makanan/data/makanan_data.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final Makanan makanan;
 
   const DetailScreen({super.key, required this.makanan});
 
   @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+  class _DetailScreenState extends State<DetailScreen> {
+  int likeCount = 0; // buat simpen jumlah like
+  bool isLiked = false; // Variabel untuk melacak apakah tombol sudah ditekan
+
+
+  void _incrementLike() {
+    if (!isLiked) { // Cek apakah tombol belum ditekan
+      setState(() {
+        likeCount++; // Tambahkan angka setiap kali tombol like ditekan
+        isLiked = true; // Tandai bahwa tombol sudah ditekan
+
+      });
+    }
+  }
+  @override
   Widget build(BuildContext context) {
+    final Makanan makanan = widget.makanan;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -18,20 +37,27 @@ class DetailScreen extends StatelessWidget {
             // DetailHeader
             Stack(
               children: [
-                // image Utama
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      makanan.imageAsset,
-                      width: double.infinity,
-                      height: 300,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                  child: Container(
+                    decoration: BoxDecoration(
+                    color: Colors.yellowAccent,
+                    borderRadius: BorderRadius.circular(8), // Opsional: Membuat sudut membulat
+                    border: Border.all(
+                      color: Colors.deepOrangeAccent.withOpacity(0.3), // Garis border dengan transparansi (samar)
+                      width: 5, // Ketebalan garis border
+          ),
+        ),
+                  child :ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    makanan.imageAsset,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+        ),
+      ),
+      ),
                 ),
-
                 // tombol back kustom
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
@@ -52,7 +78,20 @@ class DetailScreen extends StatelessWidget {
                 ),
               ],
             ),
-
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(isLiked ? Icons.thumb_up_alt : Icons.thumb_up_alt_outlined,  color: isLiked ? Colors.blue : Colors.grey, size: 18.0),
+                  onPressed: _incrementLike, // Menambah jumlah like
+                ),
+                SizedBox(width: 8.0),
+                Text(
+                  "$likeCount Likes", // Menampilkan jumlah like
+                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
             // Detail Info
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -213,6 +252,6 @@ class DetailScreen extends StatelessWidget {
         ),
       ),
     );
-
-  }
 }
+  }
+
