@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resep_makanan/screens/home_screen.dart';
+import 'package:resep_makanan/screens/profil_screen.dart';
 import 'package:resep_makanan/screens/search_screen.dart';
 import 'package:resep_makanan/screens/sign_in_screen.dart';
 import 'package:resep_makanan/screens/sign_up_screen.dart';
@@ -30,9 +31,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      // home: MainScreen(),
       //home: HomeScreen(),
       //home: MainScreen(),
-      home: SignInScreen(),
+      //home: SignInScreen(),
+      // home: ProfileScreen(),
+      // home: SignUpScreen(),
     );
   }
 }

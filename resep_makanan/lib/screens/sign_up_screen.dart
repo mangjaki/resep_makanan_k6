@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:resep_makanan/screens/profil_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
+  //StatefulWidget: Digunakan untuk membuat halaman yang membutuhkan perubahan status, seperti mengelola input teks pengguna.
   SignUpScreen({super.key});
 
   @override
@@ -10,13 +12,15 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
 
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+
+  final TextEditingController _userNameController = TextEditingController();
 
   final TextEditingController _emailController = TextEditingController();
 
-  final TextEditingController _nomorController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
 
@@ -31,10 +35,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // TODO: 1. Membuat fungsi _signUp
   void _signup() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String name = _nameController.text.trim();
-    final String username = _usernameController.text.trim();
+    final String firstName = _firstNameController.text.trim();
+    final String lastName = _lastNameController.text.trim();
+    final String userName = _userNameController.text.trim();
     final String email = _emailController.text.trim();
-    final int no_telpon = _nomorController.text.trim() as int;
+    final int phone = _phoneController.text.trim() as int;
     final String password = _passwordController.text.trim();
 
     if (password.length < 8 ||
@@ -48,11 +53,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return;
     }
 
+    // // Validasi Pada Fungsi _signup
+    // if (firstName.isEmpty ||
+    //     lastName.isEmpty ||
+    //     userName.isEmpty ||
+    //     email.isEmpty ||
+    //     phone.isEmpty||
+    //     password.isEmpty) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text('Harap isi semua field!')),
+    //   );
+    //   return;
+    // }
+
     //simpan data pengguna di SgaredPreferences
-    prefs.setString('fullname', name);
-    prefs.setString('username', username);
+    prefs.setString('firstName', firstName);
+    prefs.setString('lstName', lastName);
+    prefs.setString('userName', userName);
     prefs.setString('email', email );
-    prefs.setInt('no_telpon', no_telpon);
+    prefs.setInt('phone', phone);
     prefs.setString('password', password);
 
     //buat navigasi ke signScreen
@@ -62,10 +81,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void dispose() {
     //TODO: IMPLEMENTASI DISPOSE
-    _nameController.dispose();
-    _usernameController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _userNameController.dispose();
     _emailController.dispose();
-    _nomorController.dispose();
+    _phoneController.dispose();
     _passwordController.dispose();
 
   }
@@ -94,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   SizedBox(height: 16),
                   TextFormField(
-                    controller: _nameController,
+                    controller: _firstNameController,
                     decoration: const InputDecoration(
                       labelText: "Nama Depan",
                       border: OutlineInputBorder(),
@@ -102,9 +122,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   SizedBox(height: 16),
                   TextFormField(
-                    controller: _usernameController,
+                    controller: _lastNameController,
                     decoration: const InputDecoration(
                       labelText: "Nama Belakang",
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  TextFormField(
+                    controller: _userNameController,
+                    decoration: const InputDecoration(
+                      labelText: "Nama Pengguna",
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -118,9 +146,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   SizedBox(height: 16),
                   TextFormField(
-                    controller: _nomorController,
+                    controller: _phoneController,
                     decoration: InputDecoration(
-                      labelText: "Nomor Telepon Pengguna",
+                      labelText: "No Telepon",
                       errorText: _errorText.isNotEmpty ? _errorText : null,
                       border: const OutlineInputBorder(),
                     ),
@@ -178,4 +206,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+}
+
+extension on int {
+  Type get isEmpty => int;
 }
