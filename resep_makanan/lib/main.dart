@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resep_makanan/screens/favorite_screen.dart';
 import 'package:resep_makanan/screens/home_screen.dart';
 import 'package:resep_makanan/screens/profil_screen.dart';
 import 'package:resep_makanan/screens/search_screen.dart';
@@ -8,6 +9,7 @@ import 'package:resep_makanan/screens/sign_up_screen.dart';
 void main() {
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -31,12 +33,18 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: MainScreen(),
+      home: SignUpScreen(),
+      initialRoute: '/',
+      routes: {
+         '/home':(context) => HomeScreen(),
+         '/signin' : (context) => SignInScreen(),
+         '/signup' : (context) => SignUpScreen(),
+      }
       //home: HomeScreen(),
       //home: MainScreen(),
       //home: SignInScreen(),
       // home: ProfileScreen(),
-      // home: SignUpScreen(),
+      //home: SignUpScreen(),
     );
   }
 }
@@ -55,8 +63,8 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _children = [
     const HomeScreen(),
     const SearchScreen(),
-    //const FavoriteScreen(),
-    //const ProfileScreen(),
+    const FavoriteScreen(),
+    const ProfileScreen(),
   ];
 
   @override

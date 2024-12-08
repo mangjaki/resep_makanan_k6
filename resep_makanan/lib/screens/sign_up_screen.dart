@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:resep_makanan/screens/profil_screen.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class SignUpScreen extends StatefulWidget {
-  //StatefulWidget: Digunakan untuk membuat halaman yang membutuhkan perubahan status, seperti mengelola input teks pengguna.
   SignUpScreen({super.key});
 
   @override
@@ -12,34 +11,27 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
-  final TextEditingController _lastNameController = TextEditingController();
-
-  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
   final TextEditingController _emailController = TextEditingController();
 
-  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _nomorController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
 
-
-
-
   String _errorText = '';
 
-  //bool _isSignedUp = false;
-
   bool _obscurePassword = true;
+
   // TODO: 1. Membuat fungsi _signUp
-  void _signup() async{
+  void _signup() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String firstName = _firstNameController.text.trim();
-    final String lastName = _lastNameController.text.trim();
-    final String userName = _userNameController.text.trim();
+    final String name = _nameController.text.trim();
+    final String username = _usernameController.text.trim();
     final String email = _emailController.text.trim();
-    final int phone = _phoneController.text.trim() as int;
+    final String notelpon = _nomorController.text.trim();
     final String password = _passwordController.text.trim();
 
     if (password.length < 8 ||
@@ -53,152 +45,166 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return;
     }
 
-    // // Validasi Pada Fungsi _signup
-    // if (firstName.isEmpty ||
-    //     lastName.isEmpty ||
-    //     userName.isEmpty ||
-    //     email.isEmpty ||
-    //     phone.isEmpty||
-    //     password.isEmpty) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text('Harap isi semua field!')),
-    //   );
-    //   return;
-    // }
+    if(name.isNotEmpty && username.isNotEmpty && password.isNotEmpty){
+      final encrypt.Key key = encrypt.Key.fromLength(32);
+      final iv = encrypt.IV.fromLength(16);
+      final encrypter = encrypt.Encrypter(encrypt.AES(key));
+      final encryptedName = encrypter.encrypt(name, iv: iv);
+      final encryptedUsername = encrypter.encrypt(name, iv: iv);
+      final encryptedPassword = encrypter.encrypt(name, iv: iv);
 
-    //simpan data pengguna di SgaredPreferences
-    prefs.setString('firstName', firstName);
-    prefs.setString('lstName', lastName);
-    prefs.setString('userName', userName);
-    prefs.setString('email', email );
-    prefs.setInt('phone', phone);
-    prefs.setString('password', password);
-
+      //simpan data pengguna di SharedPreferences
+      prefs.setString('name', encryptedName.base64);
+      prefs.setString('username', encryptedUsername.base64);
+      prefs.setString('notelpon', encryptedPassword.base64);
+      prefs.setString('password', encryptedPassword.base64);
+      prefs.setString('key', key.base64);
+      prefs.setString('iv', iv.base64);
+    }
     //buat navigasi ke signScreen
     Navigator.pushReplacementNamed(context, '/signin');
   }
+
   // TODO: 2. Membuat Fungsi dispose
+
   @override
   void dispose() {
     //TODO: IMPLEMENTASI DISPOSE
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _userNameController.dispose();
+    _nameController.dispose();
+    _usernameController.dispose();
     _emailController.dispose();
-    _phoneController.dispose();
+    _nomorController.dispose();
     _passwordController.dispose();
-
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Sign Up"),),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Form(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  RichText(
-                    text: const TextSpan(
-                      text: 'FORM SIGNUP',
-                      style: TextStyle(
-                          color: Colors.deepOrangeAccent,
-                          fontSize: 30
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  TextFormField(
-                    controller: _firstNameController,
-                    decoration: const InputDecoration(
-                      labelText: "Nama Depan",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  TextFormField(
-                    controller: _lastNameController,
-                    decoration: const InputDecoration(
-                      labelText: "Nama Belakang",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  TextFormField(
-                    controller: _userNameController,
-                    decoration: const InputDecoration(
-                      labelText: "Nama Pengguna",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: "Email Pengguna",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  TextFormField(
-                    controller: _phoneController,
-                    decoration: InputDecoration(
-                      labelText: "No Telepon",
-                      errorText: _errorText.isNotEmpty ? _errorText : null,
-                      border: const OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: "Kata Sandi",
-                      errorText: _errorText.isNotEmpty ? _errorText : null,
-                      border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        onPressed: (){
-                          setState(() {
-                            _obscurePassword = !_obscurePassword;
-                          });
-                        },
-                        icon: Icon(
-                          _obscurePassword ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),),
-                    ),
-                    obscureText: _obscurePassword,
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                      onPressed: (){
-                        _signup();
-                      },
-                      child: Text('Sign Up')),
-                  SizedBox(height: 10),
-                  RichText(
-                    text: TextSpan(
-                      text: 'Sudah mempunyai Akun?',
-                      style: const TextStyle(fontSize: 16,color: Colors.deepOrangeAccent),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Login disini!',
-                          style: const TextStyle(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline,
-                              fontSize: 16
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.orangeAccent, Colors.deepOrangeAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Card(
+                elevation: 10,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Form(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        RichText(
+                          text: const TextSpan(
+                            text: 'SIGN UP',
+                            style: TextStyle(
+                              color: Colors.deepOrangeAccent,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {},
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          controller: _nameController,
+                          decoration: const InputDecoration(
+                              labelText: 'Nama Lengkap',
+                              border: OutlineInputBorder(),
+                              icon: Icon(Icons.person)
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        TextFormField(
+                          controller: _usernameController,
+                          decoration: const InputDecoration(
+                              labelText: 'Username',
+                              border: OutlineInputBorder(),
+                              icon: Icon(Icons.account_box)
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          controller: _emailController,
+                          decoration: const InputDecoration(
+                              labelText: 'Email',
+                              border: OutlineInputBorder(),
+                              icon: Icon(Icons.email)
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          controller: _nomorController,
+                          decoration: const InputDecoration(
+                              labelText: 'No Telpon',
+                              border: OutlineInputBorder(),
+                              icon: Icon(Icons.phone)
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          controller: _passwordController,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            errorText: _errorText.isNotEmpty ? _errorText : null,
+                            border: const OutlineInputBorder(),
+                            icon: const Icon(Icons.password),
+                            suffixIcon: IconButton(
+                              onPressed: (){
+                                setState(() {
+                                  _obscurePassword = !_obscurePassword;
+                                });
+                              },
+                              icon: Icon(
+                                _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                              ),
+                            ),
+                          ),
+                          obscureText: _obscurePassword,
+                        ),
+                        SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: (){
+                            _signup();
+                          },
+                          child: Text('DAFTAR'),
+                        ),
+                        SizedBox(height: 8),
+                        RichText(
+                          text: TextSpan(
+                            text: 'Sudah Memiliki Akun?',
+                            style: TextStyle(
+                              fontSize: 16,color: Colors.grey
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Login disini!',
+                                style: TextStyle(
+                                  color: Colors.deepPurple,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 16
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap =(){
+                                  Navigator.pushNamed(context, '/signin');
+                                  },
+                              ),
+                            ]
+                          ),
                         ),
                       ],
                     ),
-                  )
-                ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -206,8 +212,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-}
-
-extension on int {
-  Type get isEmpty => int;
 }

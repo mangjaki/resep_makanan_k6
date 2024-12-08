@@ -4,7 +4,7 @@ var makananList = [
   Makanan(
       nama: 'Nasi Goreng',
       asal: 'Indonesia',
-      kategori: 'Makanan Utama',
+      kategori: 'Makanan',
       deskripsi: 'Nasi goreng merupakan sajian nasi yang digoreng dalam sebuah wajan atau penggorengan yang menghasilkan cita rasa berbeda karena dicampur dengan bumbu-bumbu seperti garam, bawang putih, bawang merah, merica, rempah-rempah tertentu dan kecap manis',
       bahan:
           '1. 100 gr daging ayam, dipotong dadu \n'
@@ -47,7 +47,7 @@ var makananList = [
   Makanan(
       nama: 'Rawon',
       asal: 'Ponorogo, Jawa Timur',
-      kategori: 'Makanan Tradisional',
+      kategori: 'Makanan',
       deskripsi: 'Rawon adalah masakan khas Indonesia yang berasal dari Ponorogo, Jawa Timur, yang berupa sup daging berkuah hitam dengan campuran bumbu khas yang menggunakan kluwek. Makanan ini telah berusia lebih dari 1.000 tahun.Rawon dari Ponorogo menyebar ke penjuru Jawa Timur dan dikenal sebagai masakan khas Jawa Timur.',
       bahan:
           '1. 500 gram daging sandung lamur (brisket)\n'
@@ -86,7 +86,7 @@ var makananList = [
   Makanan(
       nama: 'Gado - Gado',
       asal: 'Surabaya, Jawa Timur',
-      kategori: 'Makanan Tradisional',
+      kategori: 'Makanan',
       deskripsi: 'GADO-GADO adalah makanan tradisional asli Indonesia, dalam bahasa sunda disebut lotek. Makanan ini sendiri mirip seperti salad karena berisi beraneka sayur-sayuran rebus. Perbedaannya dengan salad adalah pada makanan ini kombinasi sayuran dan bahan-bahan rebusan lainnya disajikan dengan disiram saus kacang.',
       bahan:
           '1. 1 siung bawang putih\n'
@@ -117,7 +117,7 @@ var makananList = [
   Makanan(
       nama: 'Soto Ayam',
       asal: 'Pekalongan, Jawa Tengah',
-      kategori: 'Makanan Tradisional',
+      kategori: 'Makanan',
       deskripsi: 'Soto merupakan salah satu jenis makanan khas Indonesia yang sangat populer di kalangan masyarakat. Makanan ini terkenal dengan kuahnya yang kaya rempah dan bumbu, serta daging yang lembut dan gurih.',
       bahan:
           '1. 500 gram ayam\n'
@@ -160,7 +160,7 @@ var makananList = [
   Makanan(
       nama: 'Rendang Daging',
       asal: 'Padang, Sumatera Barat',
-      kategori: 'Makanan Tradisional',
+      kategori: 'Makanan',
       deskripsi: 'Rendang adalah makanan tradisional khas Indonesia, khususnya berasal dari Minangkabau, Sumatra Barat. Rendang dikenal sebagai masakan berbahan dasar daging sapi yang dimasak dengan santan kelapa dan campuran berbagai rempah-rempah',
       bahan:
           '1.1 kg daging sapi\n'
@@ -200,4 +200,20 @@ var makananList = [
       ],
     isFavorite: false,
   ),
+  Makanan(
+      nama: 'Es Cendol',
+      asal: 'Ponorogo, Jawa Timur',
+      kategori: 'Minuman',
+      deskripsi: 'deskripsi',
+      bahan: 'bahan',
+      cara: 'cara',
+      imageAsset: 'images/escendol.jpeg',
+      imageUrls:[
+        'https://asset.kompas.com/crops/t3tdD3PwNMMiPxm7WKH-_qq4MmM=/0x0:1000x667/1200x800/data/photo/2023/03/12/640d6eac51567.jpg',
+        'https://asset.kompas.com/crops/5-DCREkUHd6WM1-6Fj1GcQO6ydE=/0x0:1000x667/1200x800/data/photo/2020/06/23/5ef1b36539f22.jpg',
+        'https://asset-2.tstatic.net/pontianak/foto/bank/images/resep-minuman-segar-buka-puasa-es-cendol-es-manado-es-cincau-es-campur-es-buah.jpg',
+        '',
+      ],
+    isFavorite: false,
+  )
 ];
