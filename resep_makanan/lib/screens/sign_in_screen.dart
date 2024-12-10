@@ -15,7 +15,6 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-
   String _errorText = '';
 
   bool _isSignedIn = false;
@@ -23,31 +22,32 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _obscurePassword = true;
 
   Future<Map<String, String>> _retrieveAndDecryptDataFromPrefs(
-      Future<SharedPreferences>prefs)
-  async{
+      Future<SharedPreferences> prefs) async {
     final sharedPreferences = await prefs;
-    final encryptedUsername = sharedPreferences.getString('username')?? '';
-    final encryptedPassword = sharedPreferences.getString('password')?? '';
-    final keyString = sharedPreferences.getString('key')?? '';
-    final ivString = sharedPreferences.getString('iv')?? '';
+    final encryptedUsername = sharedPreferences.getString('username') ?? '';
+    final encryptedPassword = sharedPreferences.getString('password') ?? '';
+    final keyString = sharedPreferences.getString('key') ?? '';
+    final ivString = sharedPreferences.getString('iv') ?? '';
     final encrypt.Key key = encrypt.Key.fromBase64(keyString);
     final iv = encrypt.IV.fromBase64(ivString);
     final encrypter = encrypt.Encrypter(encrypt.AES(key));
     final decrytedUsername = encrypter.decrypt64(encryptedUsername, iv: iv);
     final decryptedPassword = encrypter.decrypt64(encryptedPassword, iv: iv);
     //mengembalikan data terdekripsi
-    return{'username': decrytedUsername, 'password':decryptedPassword};
+    return {'username': decrytedUsername, 'password': decryptedPassword};
   }
 
-  void _signIn() async{
-    try{
-      final Future<SharedPreferences> prefsFuture = SharedPreferences.getInstance();
+  void _signIn() async {
+    try {
+      final Future<SharedPreferences> prefsFuture =
+          SharedPreferences.getInstance();
       final String username = _usernameController.text;
       final String password = _passwordController.text;
       print('Sign in attempt');
       if (username.isNotEmpty && password.isNotEmpty) {
         final SharedPreferences prefs = await prefsFuture;
-        final data = await _retrieveAndDecryptDataFromPrefs(prefs as Future<SharedPreferences>);
+        final data = await _retrieveAndDecryptDataFromPrefs(
+            prefs as Future<SharedPreferences>);
         if (data.isNotEmpty) {
           final decryptedUsername = data['username'];
           final decryptedPassword = data['password'];
@@ -70,10 +70,10 @@ class _SignInScreenState extends State<SignInScreen> {
         } else {
           print('No stored credentials found');
         }
-      }else{
+      } else {
         print('Username and password cannot be empty');
       }
-    }catch(e){
+    } catch (e) {
       print('An error occurred: $e');
     }
   }
@@ -135,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         border: const OutlineInputBorder(),
                         icon: Icon(Icons.password),
                         suffixIcon: IconButton(
-                          onPressed: (){
+                          onPressed: () {
                             setState(() {
                               _obscurePassword = !_obscurePassword;
                             });
@@ -150,32 +150,31 @@ class _SignInScreenState extends State<SignInScreen> {
                       obscureText: _obscurePassword,
                     ),
                     const SizedBox(height: 15),
-                    ElevatedButton(onPressed: (){}, child:Text('Login')),
+                    ElevatedButton(
+                        onPressed: () {
+                        },
+                        child: Text('Login')),
                     const SizedBox(height: 10),
                     RichText(
                         text: TextSpan(
                             text: 'Belum Memiliki Akun ? ',
-                            style:
-                            const TextStyle(
+                            style: const TextStyle(
                               fontSize: 15,
                               color: Colors.grey,
                             ),
                             children: <TextSpan>[
-                              TextSpan(
-                                text: 'Daftar Sekarang !',
-                                style: const TextStyle(
-                                    color: Colors.deepPurple,
-                                    decoration: TextDecoration.underline,
-                                    fontSize: 12
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushNamed(context, '/signup');
-                                  },
-                              )
-                            ]
-                        )
-                    )
+                          TextSpan(
+                            text: 'Daftar Sekarang !',
+                            style: const TextStyle(
+                                color: Colors.deepPurple,
+                                decoration: TextDecoration.underline,
+                                fontSize: 12),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushNamed(context, '/signup');
+                              },
+                          )
+                        ]))
                   ],
                 ),
               ),
