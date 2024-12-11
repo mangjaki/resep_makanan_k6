@@ -1,4 +1,5 @@
 class Makanan {
+  final String id;
   final String nama;
   final String asal;
   final String kategori;
@@ -10,6 +11,7 @@ class Makanan {
   bool isFavorite;
 
   Makanan({
+    required this.id,
     required this.nama,
     required this.asal,
     required this.kategori,
