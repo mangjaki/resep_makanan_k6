@@ -1,5 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:resep_makanan/data/makanan_data.dart'; 
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:resep_makanan/models/makanan.dart';
+import 'package:resep_makanan/data/makanan_data.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -9,11 +13,27 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
+  List<Makanan> favoriteList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavorites();
+  }
+
+  Future<void> _loadFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    final favoriteIds = prefs.getStringList('favorite_foods') ?? [];
+
+    setState(() {
+      favoriteList = makananList
+          .where((makanan) => favoriteIds.contains(makanan.id.toString()))
+          .toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final favoriteList =
-        makananList.where((makanan) => makanan.isFavorite).toList();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -70,9 +90,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       ),
                       trailing: IconButton(
                         icon: const Icon(Icons.favorite, color: Colors.red),
-                        onPressed: () {
+                        onPressed: () async {
+                          final prefs = await SharedPreferences.getInstance();
+                          final favoriteIds =
+                              prefs.getStringList('favorite_foods') ?? [];
+                          favoriteIds.remove(makanan.id.toString());
+                          await prefs.setStringList('favorite_foods', favoriteIds);
+
                           setState(() {
-                            makanan.isFavorite = false;
+                            favoriteList.removeAt(index);
                           });
                         },
                       ),

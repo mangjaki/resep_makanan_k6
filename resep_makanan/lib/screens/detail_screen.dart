@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:resep_makanan/models/makanan.dart';
 import 'package:resep_makanan/data/makanan_data.dart';
 
@@ -13,20 +14,56 @@ class DetailScreen extends StatefulWidget {
   State<DetailScreen> createState() => _DetailScreenState();
 }
 
-  class _DetailScreenState extends State<DetailScreen> {
-  int likeCount = 0; // buat simpen jumlah like
-  bool isLiked = false; // Variabel untuk melacak apakah tombol sudah ditekan
+class _DetailScreenState extends State<DetailScreen> {
+  int likeCount = 0;
+  bool isLiked = false;
+  bool isFavorite = false;
 
+  // Fungsi untuk menyimpan makanan favorit ke SharedPreferences
+  Future<void> _toggleFavorite() async {
+    final prefs = await SharedPreferences.getInstance();
+    final favorites = prefs.getStringList('favorite_foods') ?? [];
+
+    if (isFavorite) {
+      // Jika sudah di-favorite, hapus dari daftar
+      favorites.remove(widget.makanan.id.toString());
+    } else {
+      // Jika belum di-favorite, tambahkan ke daftar
+      favorites.add(widget.makanan.id.toString());
+    }
+
+    await prefs.setStringList('favorite_foods', favorites);
+
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
+
+  // Fungsi untuk memeriksa apakah makanan ini sudah di-favorite
+  Future<void> _checkFavoriteStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    final favorites = prefs.getStringList('favorite_foods') ?? [];
+
+    setState(() {
+      isFavorite = favorites.contains(widget.makanan.id.toString());
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFavoriteStatus(); // Periksa status favorite saat pertama kali
+  }
 
   void _incrementLike() {
-    if (!isLiked) { // Cek apakah tombol belum ditekan
+    if (!isLiked) {
       setState(() {
-        likeCount++; // Tambahkan angka setiap kali tombol like ditekan
-        isLiked = true; // Tandai bahwa tombol sudah ditekan
-
+        likeCount++;
+        isLiked = true;
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final Makanan makanan = widget.makanan;
@@ -34,33 +71,33 @@ class DetailScreen extends StatefulWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // DetailHeader
             Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                   child: Container(
                     decoration: BoxDecoration(
-                    color: Colors.yellowAccent,
-                    borderRadius: BorderRadius.circular(8), // Opsional: Membuat sudut membulat
-                    border: Border.all(
-                      color: Colors.deepOrangeAccent.withOpacity(0.3), // Garis border dengan transparansi (samar)
-                      width: 5, // Ketebalan garis border
-          ),
-        ),
-                  child :ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    makanan.imageAsset,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-        ),
-      ),
-      ),
+                      color: Colors.yellowAccent,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: Colors.deepOrangeAccent.withOpacity(0.3),
+                        width: 5,
+                      ),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        makanan.imageAsset,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
-                // tombol back kustom
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.deepPurple[100]?.withOpacity(0.8),
@@ -82,95 +119,148 @@ class DetailScreen extends StatefulWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  icon: Icon(isLiked ? Icons.thumb_up_alt : Icons.thumb_up_alt_outlined,  color: isLiked ? Colors.blue : Colors.grey, size: 18.0),
-                  onPressed: _incrementLike, // Menambah jumlah like
+                  icon: Icon(
+                    isLiked
+                        ? Icons.thumb_up_alt
+                        : Icons.thumb_up_alt_outlined,
+                    color: isLiked ? Colors.blue : Colors.grey,
+                    size: 18.0,
+                  ),
+                  onPressed: _incrementLike,
                 ),
                 SizedBox(width: 8.0),
                 Text(
-                  "$likeCount Likes", // Menampilkan jumlah like
+                  "$likeCount Likes",
                   style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-            // Detail Info
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 8,),
-                  // info atas (nama candi dan tombol favorite
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), // Menambahkan padding
-                        decoration: BoxDecoration(
-                          color: Colors.yellowAccent,
-                          borderRadius: BorderRadius.circular(8), // Opsional: Membuat sudut membulat
-                          border: Border.all(
-                            color: Colors.deepOrangeAccent.withOpacity(0.3), // Garis border dengan transparansi (samar)
-                            width: 2, // Ketebalan garis border
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.yellowAccent,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: Colors.deepOrangeAccent.withOpacity(0.3),
+                        width: 2,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.restaurant_menu, size: 24),
+                        Text(
+                          makanan.nama,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
+                        IconButton(
+                          onPressed: _toggleFavorite,
+                          icon: Icon(
+                            isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: isFavorite ? Colors.red : Colors.grey,
                           ),
-                        child : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Memastikan elemen tersebar antara kiri dan kanan
-                          children: [
-                            Icon(Icons.restaurant_menu, size: 24),
-                            Text(makanan.nama,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: (){}, icon:
-                              Icon(Icons.favorite_border),
-                            ),
-                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.location_on,
+                        color: Colors.red,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      SizedBox(
+                        width: 70,
+                        child: Text(
+                          'Asal',
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
-                  // info tengah (lokasi, dibangun, tipe)
-                  SizedBox(height: 16,),
-                  Row(children: [
-                    Icon(Icons.location_on,color: Colors.red,),
-                    SizedBox(width: 8,),
-                    SizedBox(width: 70,
-                      child: Text('Asal', style: TextStyle(
-                          fontWeight: FontWeight.bold),),),
-                    Text(': ${makanan.asal}',),
-                  ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(Icons.kitchen,color: Colors.blue,),
-                      SizedBox(width: 8,),
-                      SizedBox(width: 70,
-                        child: Text('Kategori', style: TextStyle(
-                            fontWeight: FontWeight.bold),),),
-                      Expanded(child: Text(': ${makanan.kategori}'),),
+                      Text(': ${makanan.asal}'),
                     ],
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Icon(Icons.description,color: Colors.blue,),
-                    SizedBox(width: 8,),
-                    SizedBox(width: 70,
-                      child: Text('Deskripsi', style: TextStyle(
-                          fontWeight: FontWeight.bold),),),
-                    Expanded(child: Text(': ${makanan.deskripsi}'),),
-                  ],
+                      Icon(
+                        Icons.kitchen,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      SizedBox(
+                        width: 70,
+                        child: Text(
+                          'Kategori',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(': ${makanan.kategori}'),
+                      ),
+                    ],
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.shopping_basket,color: Colors.blue,),
-                      SizedBox(width: 8,),
-                      SizedBox(width: 70,
-                        child: Text('Bahan', style: TextStyle(
-                            fontWeight: FontWeight.bold),),),
-                      Expanded(child: Text(': ${makanan.bahan}'
-                        // Membungkus teks ke baris berikutnya
-                      ),),
+                      Icon(
+                        Icons.description,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      SizedBox(
+                        width: 70,
+                        child: Text(
+                          'Deskripsi',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(': ${makanan.deskripsi}'),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.shopping_basket,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      SizedBox(
+                        width: 70,
+                        child: Text(
+                          'Bahan',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(': ${makanan.bahan}'),
+                      ),
                     ],
                   ),
                 ],
@@ -185,53 +275,67 @@ class DetailScreen extends StatefulWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.restaurant_menu,color: Colors.blue,),
-                      SizedBox(width: 8,),
-                      SizedBox(width: 70,
-                        child: Text('Cara Masak', style: TextStyle(
-                            fontWeight: FontWeight.bold),),),
-                      Expanded(child: Text(': ${makanan.cara}'
-                        // Membungkus teks ke baris berikutnya
-                      ),),
+                      Icon(
+                        Icons.restaurant_menu,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      SizedBox(
+                        width: 70,
+                        child: Text(
+                          'Cara Masak',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(': ${makanan.cara}'),
+                      ),
                     ],
                   ),
                   Divider(color: Colors.deepPurple.shade100),
-                  Text('Galeri', style: TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.bold,
-                  ),),
-                  SizedBox(height: 10,),
+                  Text(
+                    'Galeri',
+                    style: TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   SizedBox(
                     height: 100,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: makanan.imageUrls.length,
-                      itemBuilder: (context,index){
+                      itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(left: 8),
                           child: GestureDetector(
                             onTap: () {},
                             child: Container(
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: Colors.deepPurple.shade100,
-                                    width: 2,
-                                  )
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: Colors.deepPurple.shade100,
+                                  width: 2,
+                                ),
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: CachedNetworkImage(
-                                  imageUrl:makanan.imageUrls[index],
+                                  imageUrl: makanan.imageUrls[index],
                                   width: 120,
                                   height: 120,
                                   fit: BoxFit.cover,
-                                  placeholder: (context,url) => Container(
+                                  placeholder: (context, url) => Container(
                                     width: 120,
                                     height: 120,
                                     color: Colors.deepPurple[50],
                                   ),
-                                  errorWidget: (context,url,error) => Icon(Icons.error),
-
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
                                 ),
                               ),
                             ),
@@ -240,18 +344,22 @@ class DetailScreen extends StatefulWidget {
                       },
                     ),
                   ),
-                  SizedBox(height: 4,),
-                  Text('Tap untuk memperbesar', style: TextStyle(
-                    fontSize: 12,color: Colors.black54,
-                  ),),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    'Tap untuk memperbesar',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black54,
+                    ),
+                  ),
                 ],
               ),
-
             ),
           ],
         ),
       ),
     );
-}
   }
-
+}
