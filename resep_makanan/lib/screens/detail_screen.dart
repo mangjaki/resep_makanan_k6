@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:resep_makanan/models/makanan.dart';
 import 'package:resep_makanan/data/makanan_data.dart';
@@ -19,16 +18,13 @@ class _DetailScreenState extends State<DetailScreen> {
   bool isLiked = false;
   bool isFavorite = false;
 
-  // Fungsi untuk menyimpan makanan favorit ke SharedPreferences
   Future<void> _toggleFavorite() async {
     final prefs = await SharedPreferences.getInstance();
     final favorites = prefs.getStringList('favorite_foods') ?? [];
 
     if (isFavorite) {
-      // Jika sudah di-favorite, hapus dari daftar
       favorites.remove(widget.makanan.id.toString());
     } else {
-      // Jika belum di-favorite, tambahkan ke daftar
       favorites.add(widget.makanan.id.toString());
     }
 
@@ -38,8 +34,6 @@ class _DetailScreenState extends State<DetailScreen> {
       isFavorite = !isFavorite;
     });
   }
-
-  // Fungsi untuk memeriksa apakah makanan ini sudah di-favorite
   Future<void> _checkFavoriteStatus() async {
     final prefs = await SharedPreferences.getInstance();
     final favorites = prefs.getStringList('favorite_foods') ?? [];
@@ -52,16 +46,19 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
-    _checkFavoriteStatus(); // Periksa status favorite saat pertama kali
+    _checkFavoriteStatus();
   }
 
-  void _incrementLike() {
-    if (!isLiked) {
-      setState(() {
+  void _toggleLike() {
+    setState(() {
+      if (isLiked) {
+        likeCount--;
+        isLiked = false;
+      } else {
         likeCount++;
         isLiked = true;
-      });
-    }
+      }
+    });
   }
 
   @override
@@ -126,7 +123,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     color: isLiked ? Colors.blue : Colors.grey,
                     size: 18.0,
                   ),
-                  onPressed: _incrementLike,
+                  onPressed: _toggleLike,
                 ),
                 SizedBox(width: 8.0),
                 Text(
