@@ -22,61 +22,77 @@ class _SignInScreenState extends State<SignInScreen> {
 
   bool _obscurePassword = true;
 
-  Future<Map<String, String>> _retrieveAndDecryptDataFromPrefs(
-      Future<SharedPreferences>prefs)
-  async{
-    final sharedPreferences = await prefs;
-    final encryptedUsername = sharedPreferences.getString('username')?? '';
-    final encryptedPassword = sharedPreferences.getString('password')?? '';
-    final keyString = sharedPreferences.getString('key')?? '';
-    final ivString = sharedPreferences.getString('iv')?? '';
+  Future<Map<String, String>> _retrieveAndDecryptDataFromPrefs(SharedPreferences prefs) async {
+    final encryptedUsername = prefs.getString('username') ?? '';
+    final encryptedPassword = prefs.getString('password') ?? '';
+    final keyString = prefs.getString('key') ?? '';
+    final ivString = prefs.getString('iv') ?? '';
+
+    if (keyString.isEmpty || ivString.isEmpty || encryptedUsername.isEmpty || encryptedPassword.isEmpty) {
+      return {};
+    }
+
     final encrypt.Key key = encrypt.Key.fromBase64(keyString);
     final iv = encrypt.IV.fromBase64(ivString);
     final encrypter = encrypt.Encrypter(encrypt.AES(key));
-    final decrytedUsername = encrypter.decrypt64(encryptedUsername, iv: iv);
+
+    final decryptedUsername = encrypter.decrypt64(encryptedUsername, iv: iv);
     final decryptedPassword = encrypter.decrypt64(encryptedPassword, iv: iv);
-    //mengembalikan data terdekripsi
-    return{'username': decrytedUsername, 'password':decryptedPassword};
+
+    // Mengembalikan data terdekripsi
+    return {'username': decryptedUsername, 'password': decryptedPassword};
   }
 
-  void _signIn() async{
-    try{
-      final Future<SharedPreferences> prefsFuture = SharedPreferences.getInstance();
+  void _signIn() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
       final String username = _usernameController.text;
       final String password = _passwordController.text;
+
       print('Sign in attempt');
       if (username.isNotEmpty && password.isNotEmpty) {
-        final SharedPreferences prefs = await prefsFuture;
-        final data = await _retrieveAndDecryptDataFromPrefs(prefs as Future<SharedPreferences>);
+        final data = await _retrieveAndDecryptDataFromPrefs(prefs);
         if (data.isNotEmpty) {
           final decryptedUsername = data['username'];
           final decryptedPassword = data['password'];
           if (username == decryptedUsername && password == decryptedPassword) {
-            _errorText = '';
-            _isSignedIn = true;
-            prefs.setBool('isSignedIn', true);
-            // pemanggil untuk menghapus semua halaman dalam tumpukan navigasi
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.of(context).popUntil((route) => route.isFirst);
+            setState(() {
+              _errorText = '';
+              _isSignedIn = true;
             });
-            //sign in berhasil, navigasikan ke layar utama
+            prefs.setBool('isSignedIn', true);
+
+            // Navigasi ke halaman utama
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.pushReplacementNamed(context, '/');
+              Navigator.pushReplacementNamed(context, '/home');
             });
             print('Sign in succeeded');
           } else {
+            setState(() {
+              _errorText = 'Username atau password salah';
+            });
             print('Username or password is incorrect');
           }
         } else {
+          setState(() {
+            _errorText = 'Data kredensial tidak ditemukan';
+          });
           print('No stored credentials found');
         }
-      }else{
+      } else {
+        setState(() {
+          _errorText = 'Username dan password tidak boleh kosong';
+        });
         print('Username and password cannot be empty');
       }
-    }catch(e){
+    } catch (e) {
+      setState(() {
+        _errorText = 'Terjadi kesalahan: $e';
+      });
       print('An error occurred: $e');
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +166,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       obscureText: _obscurePassword,
                     ),
                     const SizedBox(height: 15),
-                    ElevatedButton(onPressed: (){}, child:Text('Login')),
+                    ElevatedButton(
+                        onPressed: (){
+                          _signIn();
+                        },
+                        child:const Text('Login')),
                     const SizedBox(height: 10),
                     RichText(
                         text: TextSpan(

@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       home: SignInScreen(),
       initialRoute: '/',
       routes: {
-         '/home':(context) => HomeScreen(),
+         '/home':(context) => MainScreen(),
          '/signin' : (context) => SignInScreen(),
          '/signup' : (context) => SignUpScreen(),
       }
