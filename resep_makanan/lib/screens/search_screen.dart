@@ -20,7 +20,10 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // TODO: 2. Buat appBar dengan judul pencarian candi
-      appBar: AppBar(title: Text('Pencarian Resep Makanan'),),
+      appBar: AppBar(
+        title: Text('Pencarian Resep Makanan'),
+        backgroundColor: Colors.deepOrange,
+      ),
       // TODO: 3. Buat body berupa Column
       body: Column(
         children: [
