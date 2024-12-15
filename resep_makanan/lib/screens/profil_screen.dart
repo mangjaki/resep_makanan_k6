@@ -11,8 +11,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   // TODO: 1.Deklarasikan variabel yang dibutuhkan
   bool isSignedIn = false;
-  String firstName = '';
-  String lastName = '';
+  String fullName = '';
   String userName = '';
   String email = '';
   String phone = '';
@@ -74,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 //TODO: 3. Buat bagian ProfileInfo yang berisi info profil
-                // Nama Depan
+                // Nama Lengkap
                 SizedBox(height: 4),
                 Divider(color: Colors.deepOrangeAccent[100]),
                 SizedBox(height: 4),
@@ -84,9 +83,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: MediaQuery.of(context).size.width / 3,
                       child: Row(
                         children: [
-                          Icon(Icons.lock, color: Colors.amber),
+                          Icon(Icons.person, color: Colors.amber),
                           SizedBox(width: 8),
-                          Text('Nama Depan',
+                          Text('Nama Lengkap',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold))
                         ],
@@ -94,14 +93,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     Expanded(
                       child: Text(
-                        ': $firstName',
+                        ': $fullName',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
                     if (isSignedIn) Icon(Icons.edit),
                   ],
                 ),
-                // Baris Nama Belakang
+                // Username
                 SizedBox(height: 4),
                 Divider(color: Colors.deepOrangeAccent[100]),
                 SizedBox(height: 4),
@@ -111,36 +110,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: MediaQuery.of(context).size.width / 3,
                       child: Row(
                         children: [
-                          Icon(Icons.lock, color: Colors.amber),
+                          Icon(Icons.person, color: Colors.amber),
                           SizedBox(width: 8),
-                          Text('Nama Belakang',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        ': $lastName',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    if (isSignedIn) Icon(Icons.edit),
-                  ],
-                ),
-                // Baris Username(Nama Pengguna)
-                SizedBox(height: 4),
-                Divider(color: Colors.deepOrangeAccent[100]),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.person, color: Colors.blue),
-                          SizedBox(width: 8),
-                          Text('Nama Pengguna',
+                          Text('Username',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold))
                         ],
@@ -155,6 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     if (isSignedIn) Icon(Icons.edit),
                   ],
                 ),
+
                 // Baris Email Pengguna
                 SizedBox(height: 4),
                 Divider(color: Colors.deepOrangeAccent[100]),
@@ -165,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: MediaQuery.of(context).size.width / 3,
                       child: Row(
                         children: [
-                          Icon(Icons.person, color: Colors.blue),
+                          Icon(Icons.email, color: Colors.blue),
                           SizedBox(width: 8),
                           Text('Email Pengguna',
                               style: TextStyle(
@@ -182,6 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     if (isSignedIn) Icon(Icons.edit),
                   ],
                 ),
+
                 // Baris Nomor Telpon
                 SizedBox(height: 4),
                 Divider(color: Colors.deepOrangeAccent[100]),
@@ -192,7 +166,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: MediaQuery.of(context).size.width / 3,
                       child: Row(
                         children: [
-                          Icon(Icons.person, color: Colors.blue),
+                          Icon(Icons.call, color: Colors.blue),
                           SizedBox(width: 8),
                           Text('No Telpon',
                               style: TextStyle(
