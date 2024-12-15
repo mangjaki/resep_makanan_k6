@@ -33,24 +33,15 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-<<<<<<< Updated upstream
       home: SignInScreen(),
-=======
-      // home: (),
->>>>>>> Stashed changes
       initialRoute: '/',
       routes: {
          '/home':(context) => MainScreen(),
          '/signin' : (context) => SignInScreen(),
          '/signup' : (context) => SignUpScreen(),
-<<<<<<< Updated upstream
         '/profile' : (context) => ProfileScreen(),
       }
 
-=======
-
-      }
->>>>>>> Stashed changes
       //home: HomeScreen(),
       //home: MainScreen(),
       //home: SignInScreen(),
