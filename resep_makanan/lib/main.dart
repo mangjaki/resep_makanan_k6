@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
          '/home':(context) => HomeScreen(),
          '/signin' : (context) => SignInScreen(),
          '/signup' : (context) => SignUpScreen(),
+         '/favorite' : (context) => FavoriteScreen(),
       }
       //home: HomeScreen(),
       //home: MainScreen(),
