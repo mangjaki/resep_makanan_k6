@@ -19,16 +19,13 @@ class _DetailScreenState extends State<DetailScreen> {
   bool isLiked = false;
   bool isFavorite = false;
 
-  // Fungsi untuk menyimpan makanan favorit ke SharedPreferences
   Future<void> _toggleFavorite() async {
     final prefs = await SharedPreferences.getInstance();
     final favorites = prefs.getStringList('favorite_foods') ?? [];
 
     if (isFavorite) {
-      // Jika sudah di-favorite, hapus dari daftar
       favorites.remove(widget.makanan.id.toString());
     } else {
-      // Jika belum di-favorite, tambahkan ke daftar
       favorites.add(widget.makanan.id.toString());
     }
 
@@ -39,7 +36,6 @@ class _DetailScreenState extends State<DetailScreen> {
     });
   }
 
-  // Fungsi untuk memeriksa apakah makanan ini sudah di-favorite
   Future<void> _checkFavoriteStatus() async {
     final prefs = await SharedPreferences.getInstance();
     final favorites = prefs.getStringList('favorite_foods') ?? [];
@@ -52,7 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   void initState() {
     super.initState();
-    _checkFavoriteStatus(); // Periksa status favorite saat pertama kali
+    _checkFavoriteStatus();
   }
 
   void _incrementLike() {
@@ -120,9 +116,7 @@ class _DetailScreenState extends State<DetailScreen> {
               children: [
                 IconButton(
                   icon: Icon(
-                    isLiked
-                        ? Icons.thumb_up_alt
-                        : Icons.thumb_up_alt_outlined,
+                    isLiked ? Icons.thumb_up_alt : Icons.thumb_up_alt_outlined,
                     color: isLiked ? Colors.blue : Colors.grey,
                     size: 18.0,
                   ),
@@ -168,9 +162,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         IconButton(
                           onPressed: _toggleFavorite,
                           icon: Icon(
-                            isFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_border,
+                            isFavorite ? Icons.favorite : Icons.favorite_border,
                             color: isFavorite ? Colors.red : Colors.grey,
                           ),
                         ),
@@ -298,7 +290,8 @@ class _DetailScreenState extends State<DetailScreen> {
                   Text(
                     'Galeri',
                     style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
