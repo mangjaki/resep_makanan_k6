@@ -95,7 +95,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           final favoriteIds =
                               prefs.getStringList('favorite_foods') ?? [];
                           favoriteIds.remove(makanan.id.toString());
-                          await prefs.setStringList('favorite_foods', favoriteIds);
+                          await prefs.setStringList(
+                              'favorite_foods', favoriteIds);
 
                           setState(() {
                             favoriteList.removeAt(index);

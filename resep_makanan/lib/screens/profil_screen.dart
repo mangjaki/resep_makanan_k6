@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:resep_makanan/screens/sign_up_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -9,246 +9,118 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // TODO: 1.Deklarasikan variabel yang dibutuhkan
+  // Variabel untuk menyimpan data pengguna
   bool isSignedIn = false;
-  String firstName = '';
-  String lastName = '';
+  String fullName = '';
   String userName = '';
   String email = '';
   String phone = '';
   int favorite = 0;
 
-  // TODO 5. Implementasi fungsi signIn
-  void signIn() {
 
-    Navigator.pushNamed(context, '/SignInScreen');
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData(); // Panggil fungsi untuk memuat data pengguna
   }
 
-  // TODO 6. Implementasi fungsi signOut
-  void signOut() {
+  // Fungsi untuk memuat data pengguna dari SharedPreferences
+  Future<void> _loadUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      isSignedIn = !isSignedIn;
+      // Ambil data dari SharedPreferences
+      fullName = prefs.getString('name') ?? 'Tidak Diketahui';
+      userName = prefs.getString('username') ?? 'Tidak Diketahui';
+      email = prefs.getString('email') ?? 'Tidak Diketahui';
+      phone = prefs.getString('notelpon') ?? 'Tidak Diketahui';
+      favorite = prefs.getInt('favorite') ?? 0;
+      isSignedIn = prefs.getBool('isSignedIn') ?? false; //Cek Status Log In
     });
+
+  }
+
+  // Fungsi untuk logout
+  Future<void> signOut() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isSignedIn', false);  // Set status login menjadi false saat logout
+
+
+    Navigator.pushReplacementNamed(context, '/signin');  // Navigasikan ke SignIn screen setelah logout
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: 200,
-            width: double.infinity,
-            color: Colors.deepOrangeAccent,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                //TODO: 2. Buat bagian ProfileHeader yang berisi gambar profil
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 200 - 50),
-                    child: Stack(
-                      alignment: Alignment.bottomRight,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.deepOrangeAccent, width: 2),
-                            shape: BoxShape.circle,
-                          ),
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage: AssetImage('images/avatar.jpg'),
-                          ),
-                        ),
-                        if (isSignedIn)
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.camera_alt,
-                                  color: Colors.deepOrangeAccent[50]))
-                      ],
-                    ),
-                  ),
+      appBar: AppBar(
+        title: const Text('Profile Screen'),
+        backgroundColor: Colors.deepOrangeAccent,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header dengan gambar profil
+            Container(
+              height: 200,
+              width: double.infinity,
+              color: Colors.deepOrangeAccent,
+              child: Center(
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: const AssetImage('images/avatar.jpg'),
+                  backgroundColor: Colors.white,
+                  child: isSignedIn
+                      ? null
+                      : const Icon(Icons.person, size: 50, color: Colors.grey),
                 ),
-                //TODO: 3. Buat bagian ProfileInfo yang berisi info profil
-                // Nama Depan
-                SizedBox(height: 4),
-                Divider(color: Colors.deepOrangeAccent[100]),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.lock, color: Colors.amber),
-                          SizedBox(width: 8),
-                          Text('Nama Depan',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        ': $firstName',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    if (isSignedIn) Icon(Icons.edit),
-                  ],
-                ),
-                // Baris Nama Belakang
-                SizedBox(height: 4),
-                Divider(color: Colors.deepOrangeAccent[100]),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.lock, color: Colors.amber),
-                          SizedBox(width: 8),
-                          Text('Nama Belakang',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        ': $lastName',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    if (isSignedIn) Icon(Icons.edit),
-                  ],
-                ),
-                // Baris Username(Nama Pengguna)
-                SizedBox(height: 4),
-                Divider(color: Colors.deepOrangeAccent[100]),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.person, color: Colors.blue),
-                          SizedBox(width: 8),
-                          Text('Nama Pengguna',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        ': $userName',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    if (isSignedIn) Icon(Icons.edit),
-                  ],
-                ),
-                // Baris Email Pengguna
-                SizedBox(height: 4),
-                Divider(color: Colors.deepOrangeAccent[100]),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.person, color: Colors.blue),
-                          SizedBox(width: 8),
-                          Text('Email Pengguna',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        ': $email',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    if (isSignedIn) Icon(Icons.edit),
-                  ],
-                ),
-                // Baris Nomor Telpon
-                SizedBox(height: 4),
-                Divider(color: Colors.deepOrangeAccent[100]),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.person, color: Colors.blue),
-                          SizedBox(width: 8),
-                          Text('No Telpon',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        ': $phone',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    if (isSignedIn) Icon(Icons.edit),
-                  ],
-                ),
-                // Baris Favorit
-                SizedBox(height: 4),
-                Divider(color: Colors.deepOrangeAccent[100]),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.favorite, color: Colors.red),
-                          SizedBox(width: 8),
-                          Text('Favorit',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold))
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        ': $favorite',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    if (isSignedIn) Icon(Icons.edit),
-                  ],
-                ),
-
-                //TODO: 4. Buat ProfileActions yang berisi TextButton sign in/out
-                SizedBox(height: 4),
-                Divider(color: Colors.deepPurple[100]),
-                SizedBox(height: 20),
-                isSignedIn
-                    ? TextButton(onPressed: signOut, child: Text('Sign Out'))
-                    : TextButton(onPressed: signIn, child: Text('Sign In')),
-              ],
+              ),
             ),
-          )
+            const SizedBox(height: 20),
+
+            // Informasi profil
+            _buildProfileInfoRow('Nama Lengkap', fullName, Icons.person),
+            _buildProfileInfoRow('Username', userName, Icons.account_circle),
+            _buildProfileInfoRow('Email', email, Icons.email),
+            _buildProfileInfoRow('No Telpon', phone, Icons.phone),
+            _buildProfileInfoRow('Favorit', favorite.toString(), Icons.favorite),
+
+            const SizedBox(height: 20),
+
+            // Tombol Log In atau Log Out
+            Center(
+              child: TextButton(
+                onPressed: isSignedIn ? signOut : signOut,
+                style: TextButton.styleFrom(
+                  backgroundColor: isSignedIn ? Colors.redAccent : Colors.blueAccent,
+                  foregroundColor: Colors.white,
+                ),
+                child: Text(isSignedIn ? 'Log Out' : 'Log In'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Widget untuk baris informasi profil
+  Widget _buildProfileInfoRow(String label, String value, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.deepOrangeAccent),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              '$label: $value',
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
         ],
       ),
     );
   }
 }
+
