@@ -39,9 +39,6 @@ var makananList = [
     imageAsset: 'images/nasigoreng.jpg',
     imageUrls: [
       'https://asset.kompas.com/crops/U6YxhTLF-vrjgM8PN3RYTHlIxfM=/84x60:882x592/1200x800/data/photo/2021/11/17/61949959e07d3.jpg',
-      'https://www.masakapahariini.com/wp-content/uploads/2021/07/Nasi-Goreng-Spesial-Ayam-Kecombrang.jpg',
-      'https://manualdecocina.com/wp-content/uploads/2024/04/Nasi-Goreng-receta.jpg',
-      'https://dcostseafood.id/wp-content/uploads/2022/04/Nasi-Goreng-spesial.jpg',
     ],
     isFavorite: false,
   ),
@@ -80,9 +77,7 @@ var makananList = [
     imageAsset: 'images/rawon.jpg',
     imageUrls: [
       'https://asset.kompas.com/crops/RAkLCVPTiwC_qhG4W4wb1dN-uX4=/0x12:983x667/1200x800/data/photo/2023/11/17/6556dc6484a92.jpg',
-      'https://lingkar.news/wp-content/uploads/2023/03/Ini-Dia-Bumbu-Rawon-Istimewa-Makanan-Tradisonal-Yang-Digemari-Turis.jpg',
       'https://static.promediateknologi.id/crop/183x78:1207x718/750x500/webp/photo/p1/828/2024/06/20/Screen-Shot-2024-06-20-at-144237-3895537447.png',
-      'https://indonesiakaya.com/wp-content/uploads/2023/04/ra_Artboard_16.jpg',
     ],
     isFavorite: false,
   ),

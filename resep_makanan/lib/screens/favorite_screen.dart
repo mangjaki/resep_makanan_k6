@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:resep_makanan/screens/detail_screen.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:resep_makanan/models/makanan.dart';
@@ -103,6 +104,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           });
                         },
                       ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailScreen(makanan: makanan),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },

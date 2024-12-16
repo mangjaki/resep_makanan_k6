@@ -332,7 +332,35 @@ class _DetailScreenState extends State<DetailScreen> {
                         return Padding(
                           padding: EdgeInsets.only(left: 8),
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    Dialog(
+                                      backgroundColor: Colors.transparent,
+                                      child: InteractiveViewer(
+                                        panEnabled: true, // Aktifkan geser
+                                        minScale: 0.5, // Skala minimal zoom
+                                        maxScale: 4.0,
+                                        child: CachedNetworkImage(
+                                          imageUrl: widget.makanan
+                                              .imageUrls[index],
+                                          fit: BoxFit.contain,
+                                          placeholder: (context, url) =>
+                                              Container(
+                                                color: Colors.deepPurple[50],
+                                                width: 300,
+                                                height: 300,
+                                              ),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons
+                                                  .error), // Skala maksimal zoom
+                                        ),
+
+                                      ),
+                                    ),
+                              );
+                            },
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
