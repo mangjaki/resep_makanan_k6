@@ -11,7 +11,6 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  // TODO: 1. Deklarasi Variable
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -39,59 +38,8 @@ class _SignInScreenState extends State<SignInScreen> {
     final decryptedUsername = encrypter.decrypt64(encryptedUsername, iv: iv);
     final decryptedPassword = encrypter.decrypt64(encryptedPassword, iv: iv);
 
-    // Mengembalikan data terdekripsi
     return {'username': decryptedUsername, 'password': decryptedPassword};
   }
-
-  // void _signIn() async {
-  //   try {
-  //     final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //     final String username = _usernameController.text;
-  //     final String password = _passwordController.text;
-  //
-  //     print('Sign in attempt');
-  //     if (username.isNotEmpty && password.isNotEmpty) {
-  //       final data = await _retrieveAndDecryptDataFromPrefs(prefs);
-  //       if (data.isNotEmpty) {
-  //         final decryptedUsername = data['username'];
-  //         final decryptedPassword = data['password'];
-  //         if (username == decryptedUsername && password == decryptedPassword) {
-  //           setState(() {
-  //             _errorText = '';
-  //             _isSignedIn = true;
-  //           });
-  //           prefs.setBool('isSignedIn', true);
-  //
-  //           // Navigasi ke halaman utama
-  //           WidgetsBinding.instance.addPostFrameCallback((_) {
-  //             Navigator.pushReplacementNamed(context, '/home');
-  //           });
-  //           print('Sign in succeeded');
-  //         } else {
-  //           setState(() {
-  //             _errorText = 'Username atau password salah';
-  //           });
-  //           print('Username or password is incorrect');
-  //         }
-  //       } else {
-  //         setState(() {
-  //           _errorText = 'Data kredensial tidak ditemukan';
-  //         });
-  //         print('No stored credentials found');
-  //       }
-  //     } else {
-  //       setState(() {
-  //         _errorText = 'Username dan password tidak boleh kosong';
-  //       });
-  //       print('Username and password cannot be empty');
-  //     }
-  //   } catch (e) {
-  //     setState(() {
-  //       _errorText = 'Terjadi kesalahan: $e';
-  //     });
-  //     print('An error occurred: $e');
-  //   }
-  // }
 
   void _signIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -99,16 +47,12 @@ class _SignInScreenState extends State<SignInScreen> {
     final String password = _passwordController.text;
 
     if (username.isNotEmpty && password.isNotEmpty) {
-      // Ambil data yang disimpan sebelumnya
       final storedUsername = prefs.getString('username');
       final storedPassword = prefs.getString('password');
 
       if (storedUsername != null && storedPassword != null) {
         if (username == storedUsername && password == storedPassword) {
-          // User berhasil login
-          prefs.setBool('isSignedIn', true);  // Menyimpan status login
-
-          // Navigasi ke Home screen setelah login berhasil
+          prefs.setBool('isSignedIn', true);  
           Navigator.pushReplacementNamed(context, '/home');
         } else {
           setState(() {
@@ -133,7 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[700], // Warna latar belakang
+      backgroundColor: Colors.grey[700],
       body: Center(
         child: SingleChildScrollView(
           child: Padding(

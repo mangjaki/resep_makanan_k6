@@ -9,7 +9,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // Variabel untuk menyimpan data pengguna
   bool isSignedIn = false;
   String fullName = '';
   String userName = '';
@@ -22,31 +21,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _loadUserData(); // Panggil fungsi untuk memuat data pengguna
+    _loadUserData();
   }
 
-  // Fungsi untuk memuat data pengguna dari SharedPreferences
   Future<void> _loadUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      // Ambil data dari SharedPreferences
       fullName = prefs.getString('name') ?? 'Tidak Diketahui';
       userName = prefs.getString('username') ?? 'Tidak Diketahui';
       email = prefs.getString('email') ?? 'Tidak Diketahui';
       phone = prefs.getString('notelpon') ?? 'Tidak Diketahui';
       favorite = prefs.getInt('favorite') ?? 0;
-      isSignedIn = prefs.getBool('isSignedIn') ?? false; //Cek Status Log In
+      isSignedIn = prefs.getBool('isSignedIn') ?? false;
     });
 
   }
 
-  // Fungsi untuk logout
   Future<void> signOut() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isSignedIn', false);  // Set status login menjadi false saat logout
+    await prefs.setBool('isSignedIn', false);
 
-
-    Navigator.pushReplacementNamed(context, '/signin');  // Navigasikan ke SignIn screen setelah logout
+    Navigator.pushReplacementNamed(context, '/signin');
   }
 
   @override
@@ -60,7 +55,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header dengan gambar profil
             Container(
               height: 200,
               width: double.infinity,
@@ -78,7 +72,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 20),
 
-            // Informasi profil
             _buildProfileInfoRow('Nama Lengkap', fullName, Icons.person),
             _buildProfileInfoRow('Username', userName, Icons.account_circle),
             _buildProfileInfoRow('Email', email, Icons.email),
@@ -87,7 +80,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             const SizedBox(height: 20),
 
-            // Tombol Log In atau Log Out
             Center(
               child: TextButton(
                 onPressed: isSignedIn ? signOut : signOut,
@@ -104,7 +96,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // Widget untuk baris informasi profil
   Widget _buildProfileInfoRow(String label, String value, IconData icon) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),

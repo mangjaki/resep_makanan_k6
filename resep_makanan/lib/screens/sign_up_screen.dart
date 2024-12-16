@@ -25,53 +25,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool _obscurePassword = true;
 
-  // TODO: 1. Membuat fungsi _signUp
-  // void _signup() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   final String name = _nameController.text.trim();
-  //   final String username = _usernameController.text.trim();
-  //   final String email = _emailController.text.trim();
-  //   final String notelpon = _nomorController.text.trim();
-  //   final String password = _passwordController.text.trim();
-  //
-  //   if (password.length < 8 ||
-  //       !password.contains(RegExp(r'[A-Z]')) ||
-  //       !password.contains(RegExp(r'[a-z]')) ||
-  //       !password.contains(RegExp(r'[0-9]')) ||
-  //       !password.contains(RegExp(r'[!@#%^&*()-_=+{}]'))) {
-  //     setState(() {
-  //       _errorText = 'Minimal 8 karakter, kombinasi [A-Z], [a-z],[0-9],[!@#%^&*()-_=+{}]';
-  //     });
-  //     return;
-  //   }
-  //
-  //   if(name.isNotEmpty && username.isNotEmpty && password.isNotEmpty){
-  //     final encrypt.Key key = encrypt.Key.fromLength(32);
-  //     final iv = encrypt.IV.fromLength(16);
-  //     final encrypter = encrypt.Encrypter(encrypt.AES(key));
-  //     final encryptedName = encrypter.encrypt(name, iv: iv);
-  //     final encryptedUsername = encrypter.encrypt(username, iv: iv);
-  //     final encryptedPassword = encrypter.encrypt(password, iv: iv);
-  //     final encryptedemail = encrypter.encrypt(email, iv: iv);
-  //     final encryptednotelpon = encrypter.encrypt(notelpon, iv: iv);
-  //
-  //
-  //
-  //     // Menyimpan data ke SharedPreferences
-  //     prefs.setString('name', encryptedName.base64);
-  //     prefs.setString('username', encryptedUsername.base64);
-  //     prefs.setString('email', encryptedemail.base64);
-  //     prefs.setString('notelpon', encryptednotelpon.base64);
-  //     prefs.setString('password', encryptedPassword.base64);
-  //     prefs.setString('key', key.base64);
-  //     prefs.setString('iv', iv.base64);
-  //     prefs.setInt('favorite', 0);  // Menyimpan data favorit dengan default 0
-  //
-  //   }
-  //   //buat navigasi ke signScreen
-  //   Navigator.pushReplacementNamed(context, '/signin');
-  // }
-
   void _signup() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String name = _nameController.text.trim();
@@ -92,25 +45,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
 
     if(name.isNotEmpty && username.isNotEmpty && password.isNotEmpty){
-      // Simpan data pengguna ke SharedPreferences
       prefs.setString('name', name);
       prefs.setString('username', username);
       prefs.setString('email', email);
       prefs.setString('notelpon', notelpon);
       prefs.setString('password', password);
-      prefs.setBool('isSignedIn', false);  // Default user belum login
+      prefs.setBool('isSignedIn', false);
 
-      // Navigasi ke SignIn screen setelah registrasi
       Navigator.pushReplacementNamed(context, '/signin');
     }
   }
-
-
-  // TODO: 2. Membuat Fungsi dispose
-
   @override
   void dispose() {
-    //TODO: IMPLEMENTASI DISPOSE
     _nameController.dispose();
     _usernameController.dispose();
     _emailController.dispose();

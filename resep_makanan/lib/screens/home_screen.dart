@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String selectedCategory = 'Makanan'; // Kategori yang dipilih
+  String selectedCategory = 'Makanan';
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       } else if (selectedCategory == 'Minuman') {
         return makanan.kategori == 'Minuman';
       }
-      return false; // Jika kategori tidak dikenali
+      return false;
     }).toList();
 
     return Scaffold(
@@ -50,7 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 190,
             fit: BoxFit.cover,
           ),
-          // Filter kategori
           SizedBox(height: 80,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const SizedBox(height: 4),
-          // GridView untuk daftar makanan
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -74,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(8),
               itemCount: filteredMakananList.length,
               itemBuilder: (_, index) {
-                Makanan makanan = filteredMakananList[index]; // Ganti dengan filteredMakananList
+                Makanan makanan = filteredMakananList[index];
                 return ItemCard(makanan: makanan);
               },
             ),
@@ -83,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-  // Widget untuk tombol kategori
   Widget _buildCategoryButton(String label, IconData icon) {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
