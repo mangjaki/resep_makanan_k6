@@ -44,8 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
+          Image.asset(
+            'assets/images/banner.jpg',
+            width: double.infinity,
+            height: 190,
+            fit: BoxFit.cover,
+          ),
           // Filter kategori
-          SizedBox(height: 50,
+          SizedBox(height: 80,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -55,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 4),
           // GridView untuk daftar makanan
           Expanded(
             child: GridView.builder(

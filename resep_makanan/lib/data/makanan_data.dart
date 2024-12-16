@@ -35,6 +35,7 @@ var makananList = [
         '8. Tambahkan udang, mie kuning dan daging ayam . Aduk rata\n'
         '9. Bumbu dengan bawang merah, putih, saus tiram, saus cabai, merica dan kecap\n'
         '10. Aduk-aduk hingga rata lalu angkat\n',
+    tutor: 'https://youtu.be/8ZjtrOktGr0?feature=shared',
     imageAsset: 'images/nasigoreng.jpg',
     imageUrls: [
       'https://asset.kompas.com/crops/U6YxhTLF-vrjgM8PN3RYTHlIxfM=/84x60:882x592/1200x800/data/photo/2021/11/17/61949959e07d3.jpg',
@@ -75,6 +76,7 @@ var makananList = [
         '2. Masukkan bahan bumbu halus dan sedikit minyak goreng, haluskan pakai blender\n'
         '3. Tumis sampai matang bumbu halus, serai, dan daun jeruk. Masukkan bumbu ke dalam air rebusan daging\n'
         '4. Tambahkan air asam jawa, garam, gula, dan kaldu sapi. Koreksi rasa. Masak sampai daging empuk dan rasa sudah pas. Angkat dan sajikan bersama bahan pelengkap\n',
+    tutor: 'https://youtu.be/3ZC3U0TYOhs?feature=shared',
     imageAsset: 'images/rawon.jpg',
     imageUrls: [
       'https://asset.kompas.com/crops/RAkLCVPTiwC_qhG4W4wb1dN-uX4=/0x12:983x667/1200x800/data/photo/2023/11/17/6556dc6484a92.jpg',
@@ -106,11 +108,11 @@ var makananList = [
         '3. Terus masak bumbu kacang hingga matang sampai meletup-letup dan kental\n'
         '4. Angkat dan sisihkan\n'
         '5. Penyajian: Ambil piring, tata rapi semua bahan gado-gado. Siram dengan saus kacang dan taburi dengan bawang goreng dan beri kerupuk secukupnya.\n',
+    tutor: 'https://youtu.be/Z10XpoJBxUE?feature=shared',
     imageAsset: 'images/gadogado.jpg',
     imageUrls: [
       'https://asset.kompas.com/crops/YE6uk7pefV-z1Npv781Lj6HbETU=/0x0:1000x667/1200x800/data/photo/2023/07/26/64c082fa9b582.jpeg',
       'https://asset.kompas.com/crops/buZORZBtCi6wAXgjlnJODvahpLk=/0x0:1000x667/1200x800/data/photo/2022/05/14/627f4186cff14.jpg',
-      'https://lingkar.news/wp-content/uploads/2023/04/Resep-Gado-Gado-Betawi-Hidangan-Buka-Puasa-Bergizi-dan-Nikmat.jpg',
       'https://static.wixstatic.com/media/ecef2e_79c86cb5d5ac444b8a6761e1fc245646~mv2.jpg/v1/fill/w_568,h_378,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/ecef2e_79c86cb5d5ac444b8a6761e1fc245646~mv2.jpg',
     ],
     isFavorite: false,
@@ -150,6 +152,7 @@ var makananList = [
         '5. Siapkan panci, panaskan 1 liter air dan tambahkan air rebusan ayam tadi masukkan ceker, tuang bumbu yang sudah di tumis ke dalam panci, tambahkan daun salam, gula, garam dan penyedap rasa, tunggu hingga mendidih, masukkan daun bawang dan tomat, koreksi rasa, setelah pas, matikan api, beri bawang goreng\n'
         '6. Masukkan ayam yang di rebus tadi ke dalam air garam, goreng sampai kecoklatan, suwir(iris2), siapkan taoge jeruk nipis bawang goreng (bawang gorengnya g keliatan masih di toples) sambal kecapnya jangan lupa dan juga krupuk udang, racik sendiri ya sotonya\n'
         '7. Selamat memasak untuk keluarga tercinta\n',
+    tutor: 'https://youtu.be/WBAYOg9vTAE?feature=shared',
     imageAsset: 'images/soto.jpg',
     imageUrls: [
       'https://asset.kompas.com/crops/aejVVPsdwoduxukD323R3zPqeQQ=/85x119:884x652/1200x800/data/photo/2023/09/01/64f19940639d3.jpg',
@@ -193,6 +196,7 @@ var makananList = [
         '5. Tambahkan bumbu kelapa sangrai yang sdh disangrai sampai coklat dan berminyak\n'
         '6. Tambahkan garam, gula jawa, aduk rata. Masak terus hingga santan berminyak daging empuk. Masak sambil sesekali diaduk. Hingga bumbu mengerinh dan berminyak butih waktu hingga 2 jam an dengan api kecil dan sesekali diaduk-aduk\n'
         '7. Selamat Mencoba :)\n',
+    tutor: 'https://youtu.be/DMcFqtm1lfY?feature=shared',
     imageAsset: 'images/rendang.jpg',
     imageUrls: [
       'https://asset.kompas.com/crops/QsUYn6p5xK4DsivCrxa0_TXdjuk=/10x36:890x623/1200x800/data/photo/2023/03/25/641e5ef63dea4.jpg',
@@ -207,15 +211,38 @@ var makananList = [
     nama: 'Es Cendol',
     asal: 'Ponorogo, Jawa Timur',
     kategori: 'Minuman',
-    deskripsi: 'deskripsi',
-    bahan: 'bahan',
-    cara: 'cara',
+    deskripsi: 'Es cendol adalah minuman yang terbuat dari tepung beras dan sebagainya yang dibentuk dengan penyaring, kemudian dicampur dengan air gula dan santan.',
+    bahan: '1. 90 tepung beras\n'
+'2. 70 tepung tapioka\n'
+'3. 600 ml air\n'
+'4. 1 sdt garam\n'
+'5. 100 ml air endapan SujiPandan (12 lbr Suji+5lbr pandan)\n'
+'Note : Jika menggunakan 1 sdt pasta pandan, air mineral 700 ml\n'
+'Bahan Kuah Santan :\n'
+'1. 700 ml santan segar dari 1/2 btr kelapa parut\n'
+'2. 2 lbr daun pandan, cuci, ikat simpul\n'
+'3. 1 sdt garam\n'
+'Bahan kuah kinca :\n'
+'1. 250 gr gula kelapa / gula merah\n'
+'2. 200 ml air mineral\n'
+'3. 2 lbr daun pandan\n'
+'Bahan lainnya :\n'
+'1. Air matang\n'
+'2. Es Batu\n',
+    cara: '1. Siapkan bahan dan Jus Suji pandan dengan air, kemudian disaring.\n'
+    '2. Siapkan panci, kalau ada gunakan panci anti lengket.Tuang air & endapan suji pandan, aduk rata lalu masukkan tepung beras & tepung tapioka aduk rata kembali, kemudian baru nyalakan kompor, masak dengan api sedang sambil terus diaduk, sampai meletup-letup dan adonan licin. Kemudian angkat.\n'
+    '3. Tuang adonan cendol kedalam cetakan, jika tidak ada bisa masukkan kedalam plastik segitiga lalu gunting ujung plastik.Gunakan kain agar tidak panas saat mencetaknya.Siapkan wadah, lalu tuang air matang tambahkan es batu, lalu semprotkan atau pencet adonan kedalam air es tadi.\n'
+    '4. Membuat kuah santan :Siapkan panci, kemudian campur jadi satu semua bahan kuah santan, masak dengan api sedang, sampai mendidih, sambil terus diaduk agar santan tidak pecah. Angkat, sisihkan.\n'
+    '5. Membuat Sirup Gula Kelapa :Campur semua bahan, masak dengan api sedang, sambil diaduk sampai mendidih. Angkat\n'
+    '6. Jika sudah dingin, disaring, kemudian masukan ke dalam botol. Sisihkan.\n'
+    '7. Es Cendol siap Disantap',
+
+    tutor: 'https://youtu.be/tr1YARopdfU?feature=shared',
     imageAsset: 'images/escendol.jpeg',
     imageUrls: [
       'https://asset.kompas.com/crops/t3tdD3PwNMMiPxm7WKH-_qq4MmM=/0x0:1000x667/1200x800/data/photo/2023/03/12/640d6eac51567.jpg',
       'https://asset.kompas.com/crops/5-DCREkUHd6WM1-6Fj1GcQO6ydE=/0x0:1000x667/1200x800/data/photo/2020/06/23/5ef1b36539f22.jpg',
       'https://asset-2.tstatic.net/pontianak/foto/bank/images/resep-minuman-segar-buka-puasa-es-cendol-es-manado-es-cincau-es-campur-es-buah.jpg',
-      '',
     ],
     isFavorite: false,
   )

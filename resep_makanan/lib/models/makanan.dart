@@ -6,6 +6,7 @@ class Makanan {
   final String deskripsi;
   final String bahan;
   final String cara;
+  final String tutor;
   final String imageAsset;
   final List<String> imageUrls;
   bool isFavorite;
@@ -18,6 +19,7 @@ class Makanan {
     required this.deskripsi,
     required this.bahan,
     required this.cara,
+    required this.tutor,
     required this.imageAsset,
     required this.imageUrls,
     this.isFavorite = false,

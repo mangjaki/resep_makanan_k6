@@ -260,6 +260,28 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ],
                   ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.shopping_basket,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      SizedBox(
+                        width: 70,
+                        child: Text(
+                          'Cara Masak',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(': ${makanan.cara}'),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -282,12 +304,12 @@ class _DetailScreenState extends State<DetailScreen> {
                       SizedBox(
                         width: 70,
                         child: Text(
-                          'Cara Masak',
+                          'Tutorial',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                       Expanded(
-                        child: Text(': ${makanan.cara}'),
+                        child: Text(': ${makanan.tutor}'),
                       ),
                     ],
                   ),
