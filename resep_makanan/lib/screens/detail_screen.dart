@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:resep_makanan/models/makanan.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:resep_makanan/data/makanan_data.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -308,8 +309,19 @@ class _DetailScreenState extends State<DetailScreen> {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      Expanded(
-                        child: Text(': ${makanan.tutor}'),
+                      InkWell(
+                        onTap: () async{
+                          final Uri url = Uri.parse(makanan.tutor);
+                          if(await canLaunchUrl(url)){
+                            await launchUrl(url);
+                          }else{
+                            throw 'tidak dapat membuka link : $url';
+                          }
+                        },
+                        child: Text(': ${makanan.tutor}',
+                            style : TextStyle(
+                                color: Colors.blue),
+                        ),
                       ),
                     ],
                   ),
