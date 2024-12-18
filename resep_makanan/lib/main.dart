@@ -33,13 +33,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MainScreen(),
+      home: SignInScreen(),
       initialRoute: '/',
       routes: {
          '/home':(context) => MainScreen(),
          '/signin' : (context) => SignInScreen(),
          '/signup' : (context) => SignUpScreen(),
-        '/profile' : (context) => ProfileScreen(),
+        // '/profile' : (context) => ProfileScreen(),
       }
 
       //home: HomeScreen(),

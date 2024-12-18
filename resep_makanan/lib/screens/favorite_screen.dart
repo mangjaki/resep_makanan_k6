@@ -41,7 +41,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           "Favorites",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
           ),
         ),
         centerTitle: true,
