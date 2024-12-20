@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:resep_makanan/screens/comment_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:resep_makanan/models/makanan.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -126,10 +127,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                   onPressed: _toggleLike,
                 ),
-                SizedBox(width: 8.0),
+                const SizedBox(width: 8.0),
                 Text(
                   "$likeCount Likes",
-                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -138,7 +139,7 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Container(
@@ -155,10 +156,10 @@ class _DetailScreenState extends State<DetailScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(Icons.restaurant_menu, size: 24),
+                        const Icon(Icons.restaurant_menu, size: 24),
                         Text(
                           makanan.nama,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -175,17 +176,17 @@ class _DetailScreenState extends State<DetailScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.location_on,
                         color: Colors.red,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 70,
                         child: Text(
                           'Asal',
@@ -198,14 +199,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.kitchen,
                         color: Colors.blue,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 70,
                         child: Text(
                           'Kategori',
@@ -220,14 +221,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.description,
                         color: Colors.blue,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 70,
                         child: Text(
                           'Deskripsi',
@@ -242,14 +243,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.shopping_basket,
                         color: Colors.blue,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 70,
                         child: Text(
                           'Bahan',
@@ -264,14 +265,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.shopping_basket,
                         color: Colors.blue,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 70,
                         child: Text(
                           'Cara Masak',
@@ -295,14 +296,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.restaurant_menu,
                         color: Colors.blue,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 8,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 70,
                         child: Text(
                           'Tutorial',
@@ -319,20 +320,20 @@ class _DetailScreenState extends State<DetailScreen> {
                           }
                         },
                         child: Text(': ${makanan.tutor}',
-                            style : TextStyle(
+                            style : const TextStyle(
                                 color: Colors.blue),
                         ),
                       ),
                     ],
                   ),
                   Divider(color: Colors.deepPurple.shade100),
-                  Text(
+                  const Text(
                     'Galeri',
                     style: TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
@@ -342,7 +343,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       itemCount: makanan.imageUrls.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.only(left: 8),
                           child: GestureDetector(
                             onTap: () {
                               showDialog(
@@ -365,7 +366,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 height: 300,
                                               ),
                                           errorWidget: (context, url, error) =>
-                                              Icon(Icons
+                                              const Icon(Icons
                                                   .error), // Skala maksimal zoom
                                         ),
 
@@ -394,7 +395,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     color: Colors.deepPurple[50],
                                   ),
                                   errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
+                                      const Icon(Icons.error),
                                 ),
                               ),
                             ),
@@ -403,15 +404,27 @@ class _DetailScreenState extends State<DetailScreen> {
                       },
                     ),
                   ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Text(
+                  const SizedBox(height: 4,),
+                  const Text(
                     'Tap untuk memperbesar',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.black54,
                     ),
+                  ),
+                  SizedBox(height: 15),
+                  ElevatedButton.icon(
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                CommentsScreen(makananId: makanan.id.toString()),
+                          ),
+                        );
+                      },
+                    icon: const Icon(Icons.comment),
+                    label: const Text("Lihat Semua Komentar"),
                   ),
                 ],
               ),

@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           Image.asset(
-            'assets/images/banner.jpg',
+            'assets/images/home.png',
             width: double.infinity,
             height: 190,
             fit: BoxFit.cover,

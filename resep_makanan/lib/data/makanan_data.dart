@@ -39,6 +39,9 @@ var makananList = [
     imageAsset: 'images/nasigoreng.jpg',
     imageUrls: [
       'https://asset.kompas.com/crops/U6YxhTLF-vrjgM8PN3RYTHlIxfM=/84x60:882x592/1200x800/data/photo/2021/11/17/61949959e07d3.jpg',
+      'https://asset.kompas.com/crops/Slbj_ngGVguffqNkbgjtdZqd8OU=/13x7:700x465/1200x800/data/photo/2021/09/24/614dc6865eb24.jpg',
+      'https://asset.kompas.com/crops/kGAAkMvrUC2UOgV-KYEbqOdpbH0=/0x1581:3915x4191/1200x800/data/photo/2022/07/21/62d95ed36e228.jpg',
+      'https://asset.kompas.com/crops/VMupLYa-zBYTf5h5GnEjMW6-Nxg=/0x0:1000x667/1200x800/data/photo/2020/11/22/5fba747cef43d.jpg',
     ],
     isFavorite: false,
   ),
@@ -78,6 +81,8 @@ var makananList = [
     imageUrls: [
       'https://asset.kompas.com/crops/RAkLCVPTiwC_qhG4W4wb1dN-uX4=/0x12:983x667/1200x800/data/photo/2023/11/17/6556dc6484a92.jpg',
       'https://static.promediateknologi.id/crop/183x78:1207x718/750x500/webp/photo/p1/828/2024/06/20/Screen-Shot-2024-06-20-at-144237-3895537447.png',
+      'https://asset.kompas.com/crops/hNtKM00giVbyEov1LyRMTB65YP8=/0x38:1000x705/1200x800/data/photo/2023/09/08/64faa742ca9ae.jpg',
+      'https://assets.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/2022/06/24/1138817398.jpg',
     ],
     isFavorite: false,
   ),
@@ -109,6 +114,7 @@ var makananList = [
       'https://asset.kompas.com/crops/YE6uk7pefV-z1Npv781Lj6HbETU=/0x0:1000x667/1200x800/data/photo/2023/07/26/64c082fa9b582.jpeg',
       'https://asset.kompas.com/crops/buZORZBtCi6wAXgjlnJODvahpLk=/0x0:1000x667/1200x800/data/photo/2022/05/14/627f4186cff14.jpg',
       'https://static.wixstatic.com/media/ecef2e_79c86cb5d5ac444b8a6761e1fc245646~mv2.jpg/v1/fill/w_568,h_378,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/ecef2e_79c86cb5d5ac444b8a6761e1fc245646~mv2.jpg',
+      'https://asset.kompas.com/crops/dvIXFEQseHh2i_8O6kbrmgIGnJk=/67x41:947x627/1200x800/data/photo/2023/04/28/644b5e7f5131f.jpg',
     ],
     isFavorite: false,
   ),
@@ -197,7 +203,7 @@ var makananList = [
       'https://asset.kompas.com/crops/QsUYn6p5xK4DsivCrxa0_TXdjuk=/10x36:890x623/1200x800/data/photo/2023/03/25/641e5ef63dea4.jpg',
       'https://asset.kompas.com/crops/dE1roQdWJGPUYoY-2V4AzhPoDcc=/0x3:977x654/1200x800/data/photo/2020/06/30/5efaf91e0ec2c.jpg',
       'https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/1067/2024/06/15/IMG_20240615_085656-3392577461.jpg',
-      'https://img-global.cpcdn.com/recipes/4d39fe268fbe3293/680x482cq70/daging-rendang-foto-resep-utama.jpg',
+      'https://asset.kompas.com/crops/niVZC_ZiMcOw_tYHeTLOKAjQC6o=/0x657:1600x1724/1200x800/data/photo/2021/07/26/60fed016da57b.jpg',
     ],
     isFavorite: false,
   ),
@@ -237,7 +243,8 @@ var makananList = [
     imageUrls: [
       'https://asset.kompas.com/crops/t3tdD3PwNMMiPxm7WKH-_qq4MmM=/0x0:1000x667/1200x800/data/photo/2023/03/12/640d6eac51567.jpg',
       'https://asset.kompas.com/crops/5-DCREkUHd6WM1-6Fj1GcQO6ydE=/0x0:1000x667/1200x800/data/photo/2020/06/23/5ef1b36539f22.jpg',
-      'https://asset-2.tstatic.net/pontianak/foto/bank/images/resep-minuman-segar-buka-puasa-es-cendol-es-manado-es-cincau-es-campur-es-buah.jpg',
+      'https://assets.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/79/2023/09/19/es-cendol-3886898579.jpg',
+      'https://assets.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/2023/03/27/es-cendol-dawet-mutiara-1949610651.jpg',
     ],
     isFavorite: false,
   )

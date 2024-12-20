@@ -31,6 +31,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           .where((makanan) => favoriteIds.contains(makanan.id.toString()))
           .toList();
     });
+
+    // Simpan jumlah favorit ke SharedPreferences
+    await prefs.setInt('favorite_count', favoriteList.length);
   }
 
   @override

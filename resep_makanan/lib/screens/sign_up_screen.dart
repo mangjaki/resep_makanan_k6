@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.orangeAccent, Colors.deepOrangeAccent],
+            colors: [Colors.grey, Colors.grey],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -182,7 +182,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap =(){
-                                  Navigator.pushNamed(context, '/SignIn');
+                                  Navigator.pushNamed(context, '/signin');
                                   },
                               ),
                             ]

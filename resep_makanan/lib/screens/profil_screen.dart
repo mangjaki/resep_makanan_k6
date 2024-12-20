@@ -104,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       userName = prefs.getString('username') ?? 'Unknown';
       email = prefs.getString('email') ?? 'Unknown';
       phone = prefs.getString('notelpon') ?? 'Unknown';
-      favorite = prefs.getInt('favorite') ?? 0;
+      favorite = prefs.getInt('favorite_count') ?? 0;
       isSignedIn = prefs.getBool('isSignedIn') ?? false;
     });
   }
@@ -173,7 +173,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           IconButton(
             onPressed: signOut,
             icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
           ),
         ],
       ),
