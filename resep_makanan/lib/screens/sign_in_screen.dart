@@ -77,7 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[700],
+      backgroundColor: Colors.orangeAccent,
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -97,10 +97,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     CircleAvatar(
                       radius: 30,
-                      backgroundColor: Colors.grey[300],
+                      backgroundColor: Colors.grey,
                       child: Icon(
                         Icons.restaurant_menu,
-                        color: Colors.grey[600],
+                        color: Colors.orangeAccent,
                         size: 40,
                       ),
                     ),
