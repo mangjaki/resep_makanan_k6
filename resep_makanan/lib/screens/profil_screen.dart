@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:resep_makanan/screens/tampilan_camera.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io' show File;
@@ -42,17 +43,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _getImage(ImageSource source) async {
+    if (kIsWeb && source == ImageSource.camera) {
+      debugPrint('Kamera tidak didukung pada web Silakan Gunakan perangkat fisik.');
+      return;
+    }
     try {
-      if (kIsWeb && source == ImageSource.camera) {
-        // Fallback for web when using camera
-        debugPrint("Camera is not supported on web.");
-        return;
-      }
       final pickedFile = await picker.pickImage(
-        source: source,
-        maxHeight: 720,
-        maxWidth: 720,
-        imageQuality: 80,
+          source: source,
+          maxHeight: 720,
+          maxWidth: 720,
+          imageQuality: 80
       );
       if (pickedFile != null) {
         setState(() {
@@ -60,10 +60,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
         _saveImage();
       } else {
-        debugPrint('No image selected!');
+        debugPrint('No image selected.');
       }
     } catch (e) {
-      debugPrint("Error picking image: $e");
+      debugPrint('ERROR');
     }
   }
 
@@ -72,21 +72,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
         context: context,
         builder: (BuildContext context) {
           return Container(
-            color: Colors.white,
+            color: Colors.indigo[50],
             child: Wrap(
               children: [
                 ListTile(
-                  leading: const Icon(Icons.camera, color: Colors.indigo),
+                  leading: const Icon(
+                    Icons.camera,
+                    color: Colors.indigo,
+                  ),
                   title: const Text('Camera'),
                   onTap: () {
                     Navigator.of(context).pop();
-                    _getImage(ImageSource.camera);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const TampilanCamera()),
+                    ).then((capturedImageUrl) {
+                      if (capturedImageUrl != null) {
+                        setState(() {
+                          _imageFile = capturedImageUrl;
+                        });
+                        _saveImage();
+                      } else {
+                        debugPrint('Tidak ada gambar yang diambil.');
+                      }
+                    });
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.photo_library, color: Colors.indigo),
+                  leading: const Icon(
+                      Icons.photo_library,
+                      color: Colors.indigo
+                  ),
                   title: const Text('Gallery'),
-                  onTap: () {
+                  onTap: (){
                     Navigator.of(context).pop();
                     _getImage(ImageSource.gallery);
                   },
@@ -94,7 +112,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           );
-        });
+        }
+    );
   }
 
   Future<void> _loadUserData() async {
